@@ -191,6 +191,11 @@
   #pet-emoji4{ font-size:58px; line-height:1; filter:drop-shadow(0 0 18px rgba(78,204,163,.7)); animation:float 3s ease-in-out infinite; }
   #exit-door-left{ position:absolute; left:0; top:0; bottom:0; width:60px; }
 
+  #page5{ flex-direction:column; height:100vh; height:100dvh; }
+  #scene-canvas5{ position:absolute; inset:0; width:100%; height:100%; }
+  #speech-bubble5::after{ content:''; position:absolute; bottom:-11px; left:50%; transform:translateX(-50%); border:6px solid transparent; border-top-color:var(--white); }
+  #pet-emoji5{ font-size:58px; line-height:1; filter:drop-shadow(0 0 18px rgba(78,204,163,.7)); animation:float 3s ease-in-out infinite; }
+
 
   /* ── 조이스틱 레이어 ── */
   #joystick-layer{
@@ -594,15 +599,61 @@
       <div id="joy-knob4" style="position:absolute;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.28);border:2px solid rgba(255,255,255,0.5);top:50%;left:50%;transform:translate(-50%,-50%);transition:none;"></div>
     </div>
     <div id="joy-right4" style="position:absolute;right:14px;bottom:60px;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:all;">
-      <div id="jump-btn4" style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#60a5fa,#93c5fd);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 3px 10px rgba(96,165,250,.4);cursor:pointer;touch-action:manipulation;">
+      <div id="jump-btn4" style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.2);backdrop-filter:blur(2px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,0);">
         <span class="j-icon" style="font-size:22px;">⬆️</span>
-        <span class="j-label" style="font-family:'Jua',cursive;font-size:11px;color:#1a1a2e;">점프운동</span>
+        <span class="j-label" style="font-family:'Jua',cursive;font-size:11px;color:rgba(255,255,255,0.45);">점프운동</span>
       </div>
     </div>
   </div>
 </div>
 <div id="toast4" style="position:fixed;bottom:140px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(10,15,40,0.92);color:var(--white);font-family:'Jua',cursive;font-size:13px;padding:8px 20px;border-radius:20px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:999;white-space:nowrap;">알림</div>
 </div><!-- /page4 -->
+
+<!-- ══════════════════════════════════════ -->
+<!--  5페이지: 강가 산책                    -->
+<!-- ══════════════════════════════════════ -->
+<div id="page5" class="page">
+<div id="header5" style="background:var(--panel);border-bottom:2px solid var(--card);padding:5px 14px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;">
+  <div style="display:flex;align-items:center;justify-content:space-between;">
+    <div id="datetime5" style="font-family:'Jua',cursive;font-size:13px;color:var(--green);letter-spacing:1px;">📅 --</div>
+    <div id="stage-badge5" style="background:var(--accent);color:#fff;font-family:'Jua',cursive;font-size:13px;padding:3px 12px;border-radius:20px;">🥚 알</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;font-family:'Jua',cursive;font-size:11.5px;color:var(--yellow);border-top:1px solid rgba(255,255,255,.07);padding-top:3px;margin-top:1px;">
+    <span>🌊 강가 산책 중</span>
+  </div>
+</div>
+<div id="top5" style="flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+  <canvas id="scene-canvas5"></canvas>
+  <div id="pet-container5" style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:30px;">
+    <div id="speech-bubble5" style="position:relative;background:var(--white);color:#1a1a2e;border-radius:16px;padding:10px 15px;font-size:12.5px;font-weight:700;width:fit-content;max-width:290px;min-width:0;text-align:left;line-height:1.6;min-height:38px;display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(0,0,0,.4);box-sizing:border-box;">
+      <span id="bubble-text5" style="display:block;width:auto;white-space:nowrap;">강물 소리가 참 좋아요! 🌊</span>
+    </div>
+    <div id="pet-emoji5" style="font-size:58px;line-height:1;filter:drop-shadow(0 0 18px rgba(78,204,163,.7));animation:float 3s ease-in-out infinite;">🥚</div>
+  </div>
+  <!-- 풍뎅이 말풍선 -->
+  <div id="beetle5-bubble" style="display:none;position:absolute;z-index:6;pointer-events:none;">
+    <div style="background:var(--white);color:#1a1a2e;border-radius:14px;padding:8px 13px;font-family:'Jua',cursive;font-size:12px;font-weight:700;line-height:1.6;max-width:160px;box-shadow:0 3px 12px rgba(0,0,0,.4);word-break:keep-all;white-space:pre-line;">
+      <span id="beetle5-bubble-text"></span>
+    </div>
+    <div style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--white);margin-left:18px;"></div>
+  </div>
+  <!-- 조이스틱 레이어 -->
+  <div id="joystick-layer5" style="position:absolute;inset:0;z-index:5;pointer-events:none;">
+    <div id="floor-badge5" style="position:absolute;top:8px;left:50%;transform:translateX(-50%);background:rgba(10,15,40,0.72);border:1.5px solid #60c0ff;color:#60c0ff;font-family:'Jua',cursive;font-size:12px;padding:3px 12px;border-radius:20px;pointer-events:none;">🌊 강가</div>
+    <div id="joy-left5" style="position:absolute;left:14px;bottom:60px;width:90px;height:90px;pointer-events:all;touch-action:none;">
+      <div style="position:absolute;inset:0;border-radius:50%;background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.18);"></div>
+      <div id="joy-knob5" style="position:absolute;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.28);border:2px solid rgba(255,255,255,0.5);top:50%;left:50%;transform:translate(-50%,-50%);transition:none;"></div>
+    </div>
+    <div id="joy-right5" style="position:absolute;right:14px;bottom:60px;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:all;">
+      <div id="jump-btn5" style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.2);backdrop-filter:blur(2px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,0);">
+        <span style="font-size:22px;">⬆️</span>
+        <span style="font-family:'Jua',cursive;font-size:11px;color:rgba(255,255,255,0.45);">점프운동</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="toast5" style="position:fixed;bottom:140px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(10,15,40,0.92);color:var(--white);font-family:'Jua',cursive;font-size:13px;padding:8px 20px;border-radius:20px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:999;white-space:nowrap;">알림</div>
+</div><!-- /page5 -->
 
 
 <script>
@@ -875,7 +926,12 @@ function showPortalDialog(){
   showGameModal(
     '밖으로 나가서 놀까요? 🌿',
     ()=>{ window.portalDialogShown = false; enterOutdoor(); },
-    ()=>{ window.portalDialogShown = false; }
+    ()=>{
+      // 거부 시 외출문 바로 왼쪽으로 알 위치 이동
+      PET_STATE.x = 0.84;
+      PET_STATE.vx = 0;
+      window.portalDialogShown = false;
+    }
   );
 }
 
@@ -895,11 +951,13 @@ const EXIT4_THRESH = 0.10;
 // ── 공벌레 이벤트 시스템 ──
 // pillbug: { x(0~1 비율), r(px), speed(px/frame), angle(회전), active, bounced, goingRight }
 let pillbugs = [];
-let pillbugPhase = 0; // 0=대기, 1=1마리등장대기, 2=1마리이동, 3=끝, 4=2마리등장, 5=2마리이동, 6=완전종료
+let pillbugPhase = 0; // 0=대기, 1=1마리등장대기, 2=1마리이동, 3=끝, 4=2마리등장, 5=2마리이동, 6=3마리등장, 7=3마리이동, 8=완전종료
 let pillbugTimer = null;
 let pillbugWarned = false; // 1마리 알림 표시 여부
 let pillbugWave2Warned = false;
+let pillbugWave3Warned = false;
 let pillbugFlowerTriggered = false;
+let pillbugHit = false; // 한 번이라도 충돌했는지
 const PILLBUG_SPEED = 1.8; // px/frame (일정한 속도)
 const PILLBUG_R = 18; // 공벌레 반지름(px)
 
@@ -908,9 +966,15 @@ function resetPillbugs(){
   pillbugPhase = 0;
   pillbugWarned = false;
   pillbugWave2Warned = false;
+  pillbugWave3Warned = false;
   pillbugFlowerTriggered = false;
+  pillbugHit = false;
   if(pillbugTimer){ clearTimeout(pillbugTimer); pillbugTimer=null; }
 }
+
+// ── 5페이지 출구문 상태 ──
+let exitDoor5Visible = false;
+let exitDoor5Timer = null;
 
 // 공벌레 이벤트: 분홍 꽃(x≈0.3) 위를 지나갈 때 트리거
 const PILLBUG_FLOWER_X = 0.3; // 분홍 꽃 x 비율
@@ -953,14 +1017,27 @@ function spawnPillbug2(){
   pillbugPhase = 4;
 }
 
+function spawnPillbug3(){
+  if(!canvas4) return;
+  const W = canvas4.width;
+  // 3마리: 점프로 피할 수 있게 뛰엄뛰엄 (간격 넓게)
+  const gap = PILLBUG_R * 9;
+  pillbugs = [
+    { x: W + PILLBUG_R + 5,           r: PILLBUG_R, angle: 0, active: true, bounced: false, goingRight: false },
+    { x: W + PILLBUG_R + 5 + gap,     r: PILLBUG_R, angle: 0, active: true, bounced: false, goingRight: false },
+    { x: W + PILLBUG_R + 5 + gap * 2, r: PILLBUG_R, angle: 0, active: true, bounced: false, goingRight: false },
+  ];
+  pillbugPhase = 6;
+}
+
 // 공벌레 충돌 모달
 function showPillbugCollisionModal(onConfirm){
-  showGameModal('아쿠! 미안해요.\n앞을 안 보고 지나갔네요. 🐛', onConfirm, onConfirm);
+  showGameModal('공벌레 : 아쿠! 미안해요.\n앞을 안 보고 지나갔네요. 🐛', onConfirm, onConfirm);
 }
 
 function updatePillbugs(){
   if(!canvas4) return;
-  if(pillbugPhase === 0 || pillbugPhase === 3 || pillbugPhase === 6) return;
+  if(pillbugPhase === 0 || pillbugPhase === 3 || pillbugPhase === 8) return;
   const W = canvas4.width, H = canvas4.height;
   const groundY = H * FLOOR4_Y_RATIO;
   const petScreenX = W * pet4State.x;
@@ -972,18 +1049,16 @@ function updatePillbugs(){
 
     // ── 1마리: 화면에 처음 등장하면 멈추고 알림 ──
     if((pillbugPhase === 1) && !pillbugWarned){
-      // 화면 안으로 들어올 때까지 이동
       if(pb.x > W - pb.r * 0.5){
         pb.x -= PILLBUG_SPEED;
         pb.angle -= 0.06;
       }
-      if(pb.x <= W - pb.r * 0.5){ // 화면에 들어오기 시작
-        pb.x = W - pb.r * 0.5; // 위치 고정
+      if(pb.x <= W - pb.r * 0.5){
+        pb.x = W - pb.r * 0.5;
         pillbugWarned = true;
-        // 알림 모달
         showGameModal(
           '공벌레가 소풍 나왔어요! 🐛\n굴러가다가 근처에 다가오면\n점프해주세요!',
-          ()=>{ pillbugPhase = 2; }, // 확인 → 이동 시작
+          ()=>{ pillbugPhase = 2; },
           ()=>{ pillbugPhase = 2; }
         );
         return;
@@ -992,13 +1067,11 @@ function updatePillbugs(){
 
     // ── 2마리: 화면에 처음 등장하면 멈추고 알림 ──
     if((pillbugPhase === 4) && !pillbugWave2Warned){
-      // 화면 안으로 들어올 때까지 이동
       if(pb.x > W - pb.r * 0.5){
         pb.x -= PILLBUG_SPEED;
         pb.angle -= 0.06;
       }
       if(pb.x <= W - pb.r * 0.5){
-        // 두 마리 모두 위치 고정
         const dx = pillbugs[1] ? pillbugs[1].x - pillbugs[0].x : 0;
         pillbugs[0].x = W - pillbugs[0].r * 0.5;
         if(pillbugs[1]) pillbugs[1].x = pillbugs[0].x + Math.abs(dx);
@@ -1012,46 +1085,61 @@ function updatePillbugs(){
       }
     }
 
+    // ── 3마리: 화면에 처음 등장하면 멈추고 알림 ──
+    if((pillbugPhase === 6) && !pillbugWave3Warned){
+      if(pb.x > W - pb.r * 0.5){
+        pb.x -= PILLBUG_SPEED;
+        pb.angle -= 0.06;
+      }
+      if(pb.x <= W - pb.r * 0.5){
+        // 세 마리 간격 유지하며 위치 고정
+        const d1 = pillbugs[1] ? pillbugs[1].x - pillbugs[0].x : 0;
+        const d2 = pillbugs[2] ? pillbugs[2].x - pillbugs[0].x : 0;
+        pillbugs[0].x = W - pillbugs[0].r * 0.5;
+        if(pillbugs[1]) pillbugs[1].x = pillbugs[0].x + Math.abs(d1);
+        if(pillbugs[2]) pillbugs[2].x = pillbugs[0].x + Math.abs(d2);
+        pillbugWave3Warned = true;
+        showGameModal(
+          '이제 마지막 친구들이에요! 🐛🐛🐛\n세 마리가 나들이 중이에요.\n사이사이를 점프로 피해주세요!',
+          ()=>{ pillbugPhase = 7; },
+          ()=>{ pillbugPhase = 7; }
+        );
+        return;
+      }
+    }
+
     // ── 이동 중 ──
-    if(pillbugPhase === 2 || pillbugPhase === 5 || pillbugPhase === 99){
-      if(pillbugPhase === 99 && !pb.bounced) continue; // 충돌 모달 중: 멈춤
+    if(pillbugPhase === 2 || pillbugPhase === 5 || pillbugPhase === 7 || pillbugPhase === 99){
+      if(pillbugPhase === 99 && !pb.bounced) continue;
       if(pb.bounced){
-        // 튕긴 뒤 오른쪽으로 이동
         pb.x += PILLBUG_SPEED * 1.5;
         pb.angle += 0.08;
         if(pb.x > W + pb.r * 2){ pb.active = false; }
       } else {
-        // 왼쪽으로 이동
         pb.x -= PILLBUG_SPEED;
-        pb.angle -= 0.06; // 굴러가는 회전
+        pb.angle -= 0.06;
 
-        // 충돌 판정: 점프 중이 아닐 때만, 아직 충돌 처리 안 됐을 때만
         if(!pet4State.isJumping && !pb.bounced){
           const dist = Math.abs(pb.x - petScreenX);
           if(dist < pb.r + petR){
-            // 충돌!
             pb.bounced = true;
             pb.goingRight = true;
-            // 알 튕김
             pet4State.vx = 0.002;
             pet4State.wobbleV = 15;
+            pillbugHit = true; // 충돌 기록
 
-            // 이동 일시 정지 (모달 표시 중)
             const savedPhase = pillbugPhase;
-            pillbugPhase = 99; // 충돌 처리 중 임시 정지
+            pillbugPhase = 99;
             showPillbugCollisionModal(()=>{
-              // 확인 후 튕겨나가도록 재개
               pillbugPhase = savedPhase;
-              // 2마리 파동이면 나머지도 튕겨서 이탈
               for(const p2 of pillbugs){
                 if(!p2.bounced){ p2.bounced = true; p2.goingRight = true; }
               }
-              setTimeout(()=>{ pillbugPhase = 6; }, 4000);
+              setTimeout(()=>{ pillbugPhase = 8; }, 4000);
             });
           }
         }
 
-        // 화면 왼쪽 완전히 빠져나감
         if(pb.x < -pb.r * 2){ pb.active = false; }
       }
     }
@@ -1062,22 +1150,53 @@ function updatePillbugs(){
     const allGone = pillbugs.every(p => !p.active);
     if(allGone){
       pillbugPhase = 3;
-      pillbugTimer = setTimeout(()=>{
-        spawnPillbug2();
-      }, 3000);
+      pillbugTimer = setTimeout(()=>{ spawnPillbug2(); }, 3000);
     }
   }
 
-  // 2마리 파동 완료 → 종료
+  // 2마리 파동 완료 → 3초 후 3마리 등장
   if(pillbugPhase === 5){
     const allGone = pillbugs.every(p => !p.active);
-    if(allGone) pillbugPhase = 6;
+    if(allGone){
+      pillbugPhase = 3;
+      pillbugTimer = setTimeout(()=>{ spawnPillbug3(); }, 3000);
+    }
+  }
+
+  // 3마리 파동 완료 → 무사통과 시 축하 모달
+  if(pillbugPhase === 7){
+    const allGone = pillbugs.every(p => !p.active);
+    if(allGone){
+      pillbugPhase = 8;
+      if(!pillbugHit){
+        setTimeout(()=>{
+          showGameModal('정말 잘 했어요! 🎉\n공벌레 친구들이 고맙다고\n전달해달래요~ 🐛🐛🐛', ()=>{}, ()=>{});
+        }, 500);
+      }
+      // 공벌레 이벤트 종료 후 5초 뒤 출구문 등장
+      if(!exitDoor5Timer && !exitDoor5Visible){
+        exitDoor5Timer = setTimeout(()=>{
+          exitDoor5Visible = true;
+          exitDoor5Timer = null;
+          showToast4('🚪 새로운 문이 생겼어요! 오른쪽 끝으로 가보세요!');
+        }, 5000);
+      }
+    }
+  }
+
+  // 충돌로 종료(phase 8 직행)된 경우도 출구문 등장
+  if(pillbugPhase === 8 && !exitDoor5Timer && !exitDoor5Visible){
+    exitDoor5Timer = setTimeout(()=>{
+      exitDoor5Visible = true;
+      exitDoor5Timer = null;
+      showToast4('🚪 새로운 문이 생겼어요! 오른쪽 끝으로 가보세요!');
+    }, 5000);
   }
 }
 
 function drawPillbugs(){
   if(!canvas4 || !ctx4) return;
-  if(pillbugPhase === 0 || pillbugPhase === 6) return;
+  if(pillbugPhase === 0 || pillbugPhase === 8) return;
   const H = canvas4.height;
   const groundY = H * FLOOR4_Y_RATIO;
 
@@ -1137,6 +1256,11 @@ function enterOutdoor(){
   pet4State.isJumping = false; pet4State.floor = 1;
   pet4State.wobble = 0; pet4State.wobbleV = 0;
   jump4Exhausted = false; jump4Count = 0;
+
+  // 출구문 상태 초기화
+  exitDoor5Visible = false;
+  window.exit5Shown = false;
+  if(exitDoor5Timer){ clearTimeout(exitDoor5Timer); exitDoor5Timer = null; }
 
   // 페이지 전환
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -1198,6 +1322,9 @@ function showReturnDialog(){
       exitOutdoor();
     },
     ()=>{
+      // 거부 시 출구문 바로 오른쪽으로 알 위치 이동
+      pet4State.x = EXIT4_THRESH + 0.12;
+      pet4State.vx = 0;
       window.exit4Shown = false;
     }
   );
@@ -1467,6 +1594,8 @@ function drawScene4(){
   drawSeasonalTree4(W, H);
   // ── 왼쪽 귀환문
   drawReturnDoor4(W, H);
+  // ── 오른쪽 5페이지 출구문
+  if(exitDoor5Visible) drawExitDoor5(W, H);
 }
 
 function drawSeasonalTree4(W, H){
@@ -1688,6 +1817,95 @@ function drawReturnDoor4(W, H){
   ctx4.restore();
 }
 
+function drawExitDoor5(W, H){
+  const groundY = H * FLOOR4_Y_RATIO;
+  const doorW = W * 0.10;
+  const doorH = doorW * 1.55;
+  // 오른쪽 끝에 위치 (귀환문의 거울 위치)
+  const doorX = W - doorW * 1.10;
+  const doorY = groundY - doorH;
+  const frameW = doorW * 0.13;
+  const depthX = doorW * 0.18;
+  const depthY = doorH * 0.07;
+
+  // 등장 애니메이션: exitDoor5Visible 직후 서서히 나타남
+  // (간단히 animT4 기반 pulse glow)
+  const glow = 0.5 + 0.5 * Math.sin(animT4 * 2.5);
+
+  // 왼쪽 측면 (3D 깊이감)
+  ctx4.beginPath();
+  ctx4.moveTo(doorX, doorY);
+  ctx4.lineTo(doorX - depthX, doorY - depthY);
+  ctx4.lineTo(doorX - depthX, groundY - depthY);
+  ctx4.lineTo(doorX, groundY);
+  ctx4.closePath();
+  ctx4.fillStyle = '#1a3a6a'; ctx4.fill();
+
+  // 윗면
+  ctx4.beginPath();
+  ctx4.moveTo(doorX, doorY);
+  ctx4.lineTo(doorX + doorW, doorY);
+  ctx4.lineTo(doorX + doorW - depthX, doorY - depthY);
+  ctx4.lineTo(doorX - depthX, doorY - depthY);
+  ctx4.closePath();
+  ctx4.fillStyle = '#2a5aaa'; ctx4.fill();
+
+  // 내부 (신비로운 보라빛 빛)
+  const gx = doorX + frameW, gy = doorY + frameW;
+  const gw = doorW - frameW * 2, gh = doorH - frameW;
+  const ig = ctx4.createLinearGradient(gx, gy, gx, gy + gh);
+  ig.addColorStop(0, `rgba(180,120,255,0.95)`);
+  ig.addColorStop(0.4, `rgba(120,80,220,0.9)`);
+  ig.addColorStop(1, `rgba(60,20,140,0.88)`);
+  ctx4.fillStyle = ig; ctx4.fillRect(gx, gy, gw, gh);
+
+  // 별빛 반짝임 효과
+  const sh = 0.18 + 0.14 * Math.sin(animT4 * 2.2);
+  const lg2 = ctx4.createRadialGradient(gx + gw * 0.5, gy + gh * 0.3, 0, gx + gw * 0.5, gy + gh * 0.5, gw);
+  lg2.addColorStop(0, `rgba(220,180,255,${sh + 0.1})`);
+  lg2.addColorStop(1, 'rgba(180,120,255,0)');
+  ctx4.fillStyle = lg2; ctx4.fillRect(gx, gy, gw, gh);
+
+  // 작은 별 파티클 (문 내부)
+  ctx4.save();
+  ctx4.rect(gx, gy, gw, gh);
+  ctx4.clip();
+  for(let i = 0; i < 5; i++){
+    const sx = gx + gw * ((i * 0.23 + animT4 * 0.07) % 1);
+    const sy = gy + gh * ((i * 0.37 + animT4 * 0.05 + i * 0.1) % 1);
+    const sr = 1.5 + Math.sin(animT4 * 3 + i) * 0.8;
+    ctx4.fillStyle = `rgba(255,240,180,${0.6 + 0.4 * Math.sin(animT4 * 2 + i)})`;
+    ctx4.beginPath(); ctx4.arc(sx, sy, sr, 0, Math.PI * 2); ctx4.fill();
+  }
+  ctx4.restore();
+
+  // 문틀 (파란 계열)
+  ctx4.fillStyle = '#2255cc';
+  ctx4.fillRect(doorX, doorY, frameW, doorH);
+  ctx4.fillRect(doorX + doorW - frameW, doorY, frameW, doorH);
+  ctx4.fillRect(doorX, doorY, doorW, frameW);
+  ctx4.strokeStyle = '#0d2a7a'; ctx4.lineWidth = 1.5;
+  ctx4.strokeRect(doorX, doorY, doorW, doorH);
+
+  // "NEXT" 라벨 (반짝임)
+  ctx4.save();
+  ctx4.font = `bold ${doorW * 0.22}px 'Jua', sans-serif`;
+  ctx4.textAlign = 'center';
+  ctx4.fillStyle = `rgba(200,170,255,${0.75 + 0.25 * glow})`;
+  ctx4.shadowColor = 'rgba(160,100,255,0.9)'; ctx4.shadowBlur = 8;
+  ctx4.fillText('NEXT', doorX + doorW * 0.5, doorY - doorW * 0.15);
+  ctx4.restore();
+
+  // 외곽 글로우
+  ctx4.save();
+  ctx4.shadowColor = `rgba(150,80,255,${0.55 + 0.45 * glow})`;
+  ctx4.shadowBlur = 18;
+  ctx4.strokeStyle = `rgba(180,120,255,${0.6 + 0.4 * glow})`;
+  ctx4.lineWidth = 2.5;
+  ctx4.strokeRect(doorX, doorY, doorW, doorH);
+  ctx4.restore();
+}
+
 // ── 4페이지 물리 ──
 function physics4Step(){
   if(!canvas4) return;
@@ -1734,6 +1952,14 @@ function physics4Step(){
     window.exit4Shown = true;
     pet4State.vx = 0;
     setTimeout(()=>showReturnDialog(), 200);
+  }
+
+  // ── 5페이지 출구문 감지 ──
+  const EXIT5_THRESH = 0.90;
+  if(exitDoor5Visible && pet4State.x > EXIT5_THRESH && !pet4State.isJumping && !window.exit5Shown){
+    window.exit5Shown = true;
+    pet4State.vx = 0;
+    setTimeout(()=>showExit5Dialog(), 200);
   }
 }
 
@@ -1793,9 +2019,1534 @@ function init4Joystick(){
 }
 
 window.exit4Shown = false;
+window.exit5Shown = false;
 
-// 리사이즈 대응
-window.addEventListener('resize',()=>{ resize4Canvas(); });
+function showExit5Dialog(){
+  // exit5Shown은 exitPage5()에서 리셋 — 5페이지 체류 중 재감지 방지
+  enterPage5();
+}
+
+// ═══════════════════════════════════════
+//  5페이지: 강가 산책
+// ═══════════════════════════════════════
+let canvas5, ctx5, animT5 = 0;
+let pet5State = {
+  x:0.12, absY:0, vx:0, vy:0, isJumping:false,
+  wobble:0, wobbleV:0, walkPhase:0,
+  floor: 'top',       // 'top'=위쪽 풀밭, 'bottom'=강 아래 풀밭
+  onBridge: false,    // 다리 타고 내려가는 중
+  bridgeProgress: 0,  // 다리 진행도 0~1
+};
+let joy5TouchId = null, joy5Dx = 0, joy5Dy = 0;
+const FLOOR5_Y_RATIO = 0.84;   // 기본 지면(왼쪽 풀밭, 오른쪽 풀밭)
+const BRIDGE5_Y_RATIO = 0.72;  // 다리 위 발판
+const GRAVITY5 = 0.18, MAX_SPEED5 = 0.000035, ACCEL5 = 0.0000035, FRICTION5 = 0.78, JUMP5_VY = -8;
+// 강 아래 층 발판 Y비율
+const BOTTOM5_Y_RATIO = 0.955; // 강 아래 풀밭 지면
+
+// 강물 애니메이션용 파티클
+const RIVER_PARTICLES = Array.from({length:60}, (_,i)=>({
+  t: Math.random(),         // 0~1 진행도
+  lane: Math.random(),      // 0~1 (강폭 내 위치)
+  speed: 0.012 + Math.random()*0.018,
+  alpha: 0.3 + Math.random()*0.5,
+  width: 1.5 + Math.random()*3,
+  phase: Math.random()*Math.PI*2,
+}));
+
+// 강 거품/파문 파티클
+const RIVER_RIPPLES = Array.from({length:20}, ()=>({
+  t: Math.random(), lane: Math.random(),
+  life: Math.random(), speed: 0.008 + Math.random()*0.012,
+  r: 3 + Math.random()*8,
+}));
+
+function showToast5(msg){
+  const el = document.getElementById('toast5');
+  if(!el) return;
+  el.textContent = msg;
+  el.style.opacity = '1'; el.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(-50%) translateY(20px)'; }, 2500);
+}
+
+function resize5Canvas(){
+  if(!canvas5) return;
+  const top5 = document.getElementById('top5');
+  if(!top5) return;
+  canvas5.width  = top5.clientWidth;
+  canvas5.height = top5.clientHeight;
+  pet5State.absY = canvas5.height * GROUND5_Y;
+}
+
+// ── 5페이지 강 레이아웃 상수 ──
+// 땅: 화면 위쪽 (y < GROUND5_Y)   → 주인공이 걷는 평지
+// 강: GROUND5_Y ~ RIVER5_BOT_Y    → 수평으로 흐르는 강
+// 강 아래: 또 다른 풀밭 (강 건너편)
+const GROUND5_Y    = 0.72;   // 땅/강 경계 (지면)
+const RIVER5_H     = 0.20;   // 강 높이 비율
+const RIVER5_BOT   = GROUND5_Y + RIVER5_H;  // 강 하단 = 0.92
+
+// 다리: 화면 중앙 약간 오른쪽
+const BRIDGE5_X    = 0.52;   // 다리 중심 x 비율
+const BRIDGE5_W    = 0.14;   // 다리 너비 비율
+
+function drawScene5(){
+  if(!canvas5||!ctx5) return;
+  const W=canvas5.width, H=canvas5.height;
+  if(!W||!H) return;
+  ctx5.clearRect(0,0,W,H);
+
+  const code = weatherScene.code;
+  const wType = getWeatherType(code);
+  const now5 = new Date();
+  const hour5 = now5.getHours();
+  const isNight5 = (hour5>=22||hour5<5);
+  const isDusk5  = (hour5>=18&&hour5<22)||(hour5>=5&&hour5<8);
+  const isRainy5 = (wType==='rain'||wType==='thunder'||wType==='showers'||wType==='drizzle');
+
+  // ① 하늘
+  const pal5 = getCurrentSkyPalette();
+  const cloudDark5 = wType==='overcast'?0.28:wType==='rain'||wType==='thunder'||wType==='showers'?0.35:wType==='drizzle'?0.18:wType==='fog'?0.15:0;
+  const tr5 = pal5.top.map(v=>Math.max(0,v-v*cloudDark5));
+  const br5 = pal5.bot.map(v=>Math.max(0,v-v*cloudDark5));
+  const skyG = ctx5.createLinearGradient(0,0,0,H*0.75);
+  skyG.addColorStop(0,`rgb(${tr5[0]|0},${tr5[1]|0},${tr5[2]|0})`);
+  skyG.addColorStop(1,`rgb(${br5[0]|0},${br5[1]|0},${br5[2]|0})`);
+  ctx5.fillStyle=skyG; ctx5.fillRect(0,0,W,H);
+
+  // ② 안개
+  if(wType==='fog'){
+    const fog5=ctx5.createLinearGradient(0,H*0.2,0,H*0.8);
+    fog5.addColorStop(0,'rgba(200,200,190,0.18)');
+    fog5.addColorStop(0.5,'rgba(200,200,190,0.42)');
+    fog5.addColorStop(1,'rgba(180,180,170,0.25)');
+    ctx5.fillStyle=fog5; ctx5.fillRect(0,0,W,H);
+  }
+
+  // ③ 별
+  const clearness5 = wType==='clear'?1:wType==='mostly_clear'?0.7:wType==='partly_cloudy'?0.35:0;
+  const nightness5 = isNight5?1:isDusk5?0.3:0;
+  const starA5 = Math.min(1,clearness5*nightness5)*0.8;
+  if(starA5>0.03){
+    [[.09,.05],[.25,.04],[.46,.08],[.62,.03],[.37,.12],[.80,.06],[.05,.17],[.55,.03],[.72,.15],[.18,.19],[.88,.11]].forEach(([sx,sy],si)=>{
+      const pulse=0.5+0.5*Math.sin(animT5*1.5+sx*7+si);
+      ctx5.fillStyle=`rgba(255,255,235,${starA5*pulse})`;
+      ctx5.beginPath(); ctx5.arc(W*sx,H*sy,(1.2+pulse*0.8)*starA5,0,Math.PI*2); ctx5.fill();
+    });
+  }
+
+  // ④ 달
+  if(nightness5>0.1&&!isRainy5&&clearness5>0){
+    const moonA5=Math.min(0.85,nightness5*clearness5);
+    if(moonA5>0.05){
+      const mHour5=hour5>=22?hour5-22:hour5+2;
+      const mXT=Math.min(mHour5/7,1);
+      const mX5=W*(0.08+mXT*0.84), mY5=H*Math.max(0.04,0.18-0.12*Math.sin(mXT*Math.PI));
+      ctx5.save(); ctx5.globalAlpha=moonA5;
+      const halo5=ctx5.createRadialGradient(mX5,mY5,11,mX5,mY5,40);
+      halo5.addColorStop(0,'rgba(255,250,200,0.13)'); halo5.addColorStop(1,'transparent');
+      ctx5.fillStyle=halo5; ctx5.beginPath(); ctx5.arc(mX5,mY5,40,0,Math.PI*2); ctx5.fill();
+      ctx5.beginPath(); ctx5.arc(mX5,mY5,14,0,Math.PI*2);
+      ctx5.fillStyle='rgb(245,245,210)'; ctx5.fill(); ctx5.restore();
+    }
+  }
+
+  // ⑤ 태양
+  const daytime5=(!isNight5&&!isDusk5)?1:(isDusk5&&hour5>=5&&hour5<8)?0.5:0;
+  if(daytime5>0.05&&(wType==='clear'||wType==='mostly_clear'||wType==='partly_cloudy')&&!isRainy5){
+    const sunAlpha5=daytime5*(wType==='clear'?0.9:wType==='mostly_clear'?0.7:0.45);
+    const sMin5=now5.getMinutes()/60;
+    const sHour5=(hour5>=6&&hour5<=18)?hour5+sMin5:6;
+    const sT5=Math.min(Math.max((sHour5-6)/12,0),1);
+    const sX5=W*(0.06+sT5*0.88), sY5=H*(0.18-0.13*Math.sin(sT5*Math.PI));
+    ctx5.save(); ctx5.globalAlpha=sunAlpha5;
+    for(let ri=0;ri<12;ri++){
+      const angle=ri/12*Math.PI*2+animT5*0.3;
+      ctx5.strokeStyle=`rgba(255,230,80,${sunAlpha5*0.25})`; ctx5.lineWidth=2;
+      ctx5.beginPath();
+      ctx5.moveTo(sX5+Math.cos(angle)*16,sY5+Math.sin(angle)*16);
+      ctx5.lineTo(sX5+Math.cos(angle)*(25+Math.sin(animT5*2+ri)*3),sY5+Math.sin(angle)*(25+Math.sin(animT5*2+ri)*3));
+      ctx5.stroke();
+    }
+    const sG5=ctx5.createRadialGradient(sX5,sY5,0,sX5,sY5,22);
+    sG5.addColorStop(0,'rgba(255,255,200,1)'); sG5.addColorStop(0.35,'rgba(255,240,80,0.95)');
+    sG5.addColorStop(0.7,'rgba(255,200,50,0.4)'); sG5.addColorStop(1,'transparent');
+    ctx5.fillStyle=sG5; ctx5.beginPath(); ctx5.arc(sX5,sY5,22,0,Math.PI*2); ctx5.fill(); ctx5.restore();
+  }
+
+  // ⑥ 구름
+  const cloudCount5=wType==='clear'?0:wType==='mostly_clear'?1:wType==='partly_cloudy'?3:wType==='overcast'||wType==='fog'?8:wType==='rain'||wType==='thunder'||wType==='showers'?7:wType==='drizzle'?5:wType==='snow'?6:2;
+  for(let ci=0;ci<Math.min(cloudCount5,CLOUDS.length);ci++){
+    const c=CLOUDS[ci];
+    const rawX=(c.x+animT5*c.spd*0.06)%1.4;
+    const cx5=W*rawX, cy5=H*c.y, cw5=W*c.w, ch5=H*c.h;
+    const isRainCloud5=(wType==='rain'||wType==='thunder'||wType==='showers')&&ci<4;
+    const isDrizzleCloud5=wType==='drizzle';
+    const cr5=isRainCloud5?55:isDrizzleCloud5?120:200;
+    const cg5=isRainCloud5?55:isDrizzleCloud5?130:210;
+    const cb5=isRainCloud5?70:isDrizzleCloud5?145:220;
+    const cloudAlpha5=c.alpha*(isRainCloud5?0.85:0.72);
+    ctx5.save(); ctx5.globalAlpha=cloudAlpha5;
+    const cloudG5=ctx5.createRadialGradient(cx5,cy5,0,cx5,cy5+ch5*0.3,cw5*0.7);
+    cloudG5.addColorStop(0,`rgba(${cr5+30},${cg5+30},${cb5+30},0.95)`);
+    cloudG5.addColorStop(0.5,`rgba(${cr5},${cg5},${cb5},0.8)`);
+    cloudG5.addColorStop(1,'transparent');
+    ctx5.fillStyle=cloudG5;
+    ctx5.beginPath(); ctx5.ellipse(cx5,cy5+ch5*0.25,cw5*0.48,ch5*0.5,0,0,Math.PI*2); ctx5.fill();
+    ctx5.beginPath(); ctx5.ellipse(cx5-cw5*0.22,cy5+ch5*0.4,cw5*0.32,ch5*0.42,0,0,Math.PI*2); ctx5.fill();
+    ctx5.beginPath(); ctx5.ellipse(cx5+cw5*0.22,cy5+ch5*0.38,cw5*0.3,ch5*0.4,0,0,Math.PI*2); ctx5.fill();
+    ctx5.beginPath(); ctx5.ellipse(cx5-cw5*0.1,cy5+ch5*0.15,cw5*0.28,ch5*0.35,0,0,Math.PI*2); ctx5.fill();
+    ctx5.beginPath(); ctx5.ellipse(cx5+cw5*0.15,cy5+ch5*0.12,cw5*0.25,ch5*0.3,0,0,Math.PI*2); ctx5.fill();
+    ctx5.restore();
+  }
+
+  // ⑦ 빗줄기
+  if(isRainy5){
+    const spd5=wType==='drizzle'?0.18:wType==='rain'?0.32:wType==='thunder'?0.45:0.38;
+    const dropCount5=wType==='drizzle'?28:wType==='thunder'?55:42;
+    const baseAlpha5=wType==='drizzle'?0.55:0.7;
+    const dropLen5=wType==='drizzle'?6:wType==='thunder'?18:12;
+    RAINDROPS.forEach((d,di)=>{
+      if(di>=dropCount5) return;
+      const ry5=H*((d.y+animT5*d.spd*spd5)%1.0);
+      const rx5=W*d.x;
+      ctx5.strokeStyle=`rgba(160,200,240,${d.alpha*baseAlpha5})`; ctx5.lineWidth=wType==='drizzle'?0.9:1.4;
+      ctx5.beginPath(); ctx5.moveTo(rx5,ry5); ctx5.lineTo(rx5-2,ry5+dropLen5); ctx5.stroke();
+    });
+  }
+
+  // ⑧ 눈송이
+  if(wType==='snow'){
+    SNOWFLAKES.forEach(f=>{
+      const fy5=H*((f.y+animT5*f.spd*0.08)%1.05);
+      const fx5=W*((f.x+Math.sin(animT5*f.drift+f.ph)*0.05)%1);
+      ctx5.fillStyle='rgba(240,248,255,0.85)';
+      ctx5.beginPath(); ctx5.arc(fx5,fy5,f.r,0,Math.PI*2); ctx5.fill();
+    });
+  }
+
+  // ⑨ 번개
+  if(wType==='thunder'){
+    const ltPhase5=(animT5%4.5)/4.5;
+    if(ltPhase5<0.06){
+      const flash5=(0.06-ltPhase5)/0.06;
+      ctx5.fillStyle=`rgba(210,225,255,${flash5*0.35})`; ctx5.fillRect(0,0,W,H);
+      if(flash5>0.6){
+        const lx5=W*(0.3+((animT5*0.13)%1)*0.4);
+        ctx5.strokeStyle=`rgba(255,255,255,${flash5*0.9})`; ctx5.lineWidth=2; ctx5.lineCap='round';
+        ctx5.beginPath(); ctx5.moveTo(lx5,0);
+        ctx5.lineTo(lx5+18,H*0.2); ctx5.lineTo(lx5-12,H*0.36); ctx5.lineTo(lx5+14,H*0.52); ctx5.stroke();
+      }
+    }
+  }
+
+  // ⑩ 일출/일몰 노을
+  if(hour5>=5&&hour5<8){
+    const t5=(hour5>=6?1-(hour5-6)/2:0.5);
+    const gw5=ctx5.createLinearGradient(0,H*0.3,0,H*0.75);
+    gw5.addColorStop(0,`rgba(255,140,40,${0.15*t5})`); gw5.addColorStop(1,`rgba(255,80,20,${0.08*t5})`);
+    ctx5.fillStyle=gw5; ctx5.fillRect(0,0,W,H);
+  }
+  if(hour5>=18&&hour5<21){
+    const t5=1-(hour5-18)/3;
+    const gw5=ctx5.createLinearGradient(0,H*0.2,0,H*0.75);
+    gw5.addColorStop(0,`rgba(255,100,30,${0.2*t5})`);
+    gw5.addColorStop(0.5,`rgba(220,60,20,${0.12*t5})`);
+    gw5.addColorStop(1,'transparent');
+    ctx5.fillStyle=gw5; ctx5.fillRect(0,0,W,H);
+  }
+
+  // ── 풀밭 (지면) ──
+  drawGrass5(W, H, isRainy5);
+
+  // ── 강 그리기 (지면 아래) ──
+  drawRiver5(W, H, isNight5, isRainy5, wType);
+
+  // ── 물고기 (강물 위, 풀밭·다리보다 먼저) ──
+  drawFish5(W, H);
+
+  // ── 다리 ──
+  drawBridge5(W, H);
+
+  // ── 왼쪽 귀환문 (4페이지로) ──
+  drawReturnDoor5(W, H);
+
+  // ── 10초 후 반짝이는 별 ──
+  drawStar5(W, H);
+
+  // ── 풍뎅이 ──
+  drawBeetle5(W, H);
+}
+
+function drawGrass5(W, H, isRainy){
+  const grY = H * GROUND5_Y;
+
+  // ── 지면 풀밭 (위쪽 평지) ──
+  const grassG = ctx5.createLinearGradient(0, grY - H*0.12, 0, grY);
+  grassG.addColorStop(0, '#3a8a28');
+  grassG.addColorStop(1, '#2e6e1e');
+  ctx5.fillStyle = grassG;
+  ctx5.fillRect(0, grY - H*0.14, W, H*0.14 + 2);
+
+  // 지면 위 풀잎들
+  for(let i = 0; i < 22; i++){
+    const gx = W * (i / 22 + 0.02);
+    const gy = grY;
+    const gh = 10 + Math.sin(i * 1.7) * 4;
+    const sway = Math.sin(animT5 * 0.8 + i * 0.55) * (isRainy ? 5 : 3);
+    ctx5.strokeStyle = i%3===0 ? '#5abf3a' : '#4aaa2e';
+    ctx5.lineWidth = 2;
+    ctx5.lineCap = 'round';
+    ctx5.beginPath();
+    ctx5.moveTo(gx, gy);
+    ctx5.quadraticCurveTo(gx + sway, gy - gh*0.6, gx + sway*1.4, gy - gh);
+    ctx5.stroke();
+  }
+
+  // ── 지면선 (강 위 경계선) ──
+  ctx5.strokeStyle = '#1e4d12';
+  ctx5.lineWidth = 2.5;
+  ctx5.beginPath();
+  ctx5.moveTo(0, grY); ctx5.lineTo(W, grY);
+  ctx5.stroke();
+
+  // ── 강 건너편 풀밭 (화면 맨 아래) ──
+  const botY = H * RIVER5_BOT;
+  const farG = ctx5.createLinearGradient(0, botY, 0, H);
+  farG.addColorStop(0, '#2e6e1e');
+  farG.addColorStop(1, '#3a8a28');
+  ctx5.fillStyle = farG;
+  ctx5.fillRect(0, botY, W, H - botY);
+
+  // 건너편 풀잎 (작게)
+  for(let i = 0; i < 16; i++){
+    const gx = W * (i / 16 + 0.03);
+    const gy = botY;
+    const gh = 7 + Math.sin(i * 2.1) * 3;
+    const sway = Math.sin(animT5 * 0.7 + i * 0.6 + 1.5) * 2.5;
+    ctx5.strokeStyle = '#5abf3a';
+    ctx5.lineWidth = 1.5;
+    ctx5.beginPath();
+    ctx5.moveTo(gx, gy);
+    ctx5.quadraticCurveTo(gx + sway, gy + gh*0.5, gx + sway*1.3, gy + gh);
+    ctx5.stroke();
+  }
+
+  // 건너편 경계선
+  ctx5.strokeStyle = '#1e4d12';
+  ctx5.lineWidth = 2;
+  ctx5.beginPath();
+  ctx5.moveTo(0, botY); ctx5.lineTo(W, botY);
+  ctx5.stroke();
+
+  // 꽃 (양쪽 강변)
+  const flowers = [
+    {x:0.12, y: GROUND5_Y, side:'top', color:'#f472b6'},
+    {x:0.28, y: GROUND5_Y, side:'top', color:'#facc15'},
+    {x:0.72, y: GROUND5_Y, side:'top', color:'#a78bfa'},
+    {x:0.85, y: GROUND5_Y, side:'top', color:'#fb923c'},
+    {x:0.20, y: RIVER5_BOT, side:'bot', color:'#facc15'},
+    {x:0.78, y: RIVER5_BOT, side:'bot', color:'#facc15'},
+  ];
+  flowers.forEach(({x, y, side, color}) => {
+    const fx = W*x, fy = H*y;
+    const dir = side==='top' ? -1 : 1;
+    const stemH = 12 + Math.sin(animT5*0.6 + x*10)*2;
+    const sway = Math.sin(animT5*0.8 + x*8) * 2;
+    ctx5.strokeStyle = '#3a7a2a'; ctx5.lineWidth = 1.8;
+    ctx5.beginPath();
+    ctx5.moveTo(fx, fy);
+    ctx5.quadraticCurveTo(fx+sway, fy+dir*stemH*0.5, fx+sway*1.2, fy+dir*stemH);
+    ctx5.stroke();
+    for(let p=0;p<5;p++){
+      const a = p/5*Math.PI*2;
+      ctx5.fillStyle = color;
+      ctx5.beginPath();
+      ctx5.ellipse(fx+sway*1.2+Math.cos(a)*5, fy+dir*stemH+Math.sin(a)*4, 4, 2.5, a, 0, Math.PI*2);
+      ctx5.fill();
+    }
+    ctx5.fillStyle='#fff176';
+    ctx5.beginPath(); ctx5.arc(fx+sway*1.2, fy+dir*stemH, 3.5, 0, Math.PI*2); ctx5.fill();
+  });
+}
+
+function drawRiver5(W, H, isNight, isRainy, wType){
+  const topY = H * GROUND5_Y;
+  const botY = H * RIVER5_BOT;
+  const rH   = botY - topY;
+
+  // ── 강물 기본색 ──
+  const isNightRiver = isNight;
+  const riverBase = isNightRiver
+    ? ['rgba(18,35,75,0.96)', 'rgba(25,50,110,0.94)']
+    : isRainy
+    ? ['rgba(55,85,140,0.95)', 'rgba(70,110,175,0.92)']
+    : ['rgba(40,120,200,0.93)', 'rgba(70,165,230,0.90)'];
+
+  const rg = ctx5.createLinearGradient(0, topY, 0, botY);
+  rg.addColorStop(0,   riverBase[0]);
+  rg.addColorStop(0.5, riverBase[1]);
+  rg.addColorStop(1,   riverBase[0]);
+  ctx5.fillStyle = rg;
+  ctx5.fillRect(0, topY, W, rH);
+
+  // ── 강물 흐름 (수평 물결선) ──
+  ctx5.save();
+  ctx5.beginPath();
+  ctx5.rect(0, topY, W, rH);
+  ctx5.clip();
+
+  RIVER_PARTICLES.forEach(p => {
+    // x: 오른쪽→왼쪽 흐름
+    const rawX = 1 - ((p.t + animT5 * p.speed) % 1);
+    const x = rawX * W * 1.15 - W*0.08;
+    // y: 강 내 위치 (lane 기반)
+    const baseY = topY + rH * (0.12 + p.lane * 0.76);
+    const waveY = baseY + Math.sin(animT5 * 2.0 + p.phase + rawX * 6) * 3;
+
+    const tailLen = 20 + p.width * 5;
+    const nightShimmer = isNightRiver ? 0.5 + 0.5*Math.sin(animT5*3+p.phase) : 1;
+    const alpha = p.alpha * nightShimmer * (isNightRiver ? 0.55 : 0.72);
+
+    const lineG = ctx5.createLinearGradient(x + tailLen, waveY, x, waveY);
+    lineG.addColorStop(0, 'rgba(180,230,255,0)');
+    lineG.addColorStop(1, isNightRiver
+      ? `rgba(100,160,255,${alpha})`
+      : `rgba(200,240,255,${alpha})`);
+    ctx5.strokeStyle = lineG;
+    ctx5.lineWidth = p.width * 0.65;
+    ctx5.lineCap = 'round';
+    ctx5.beginPath();
+    ctx5.moveTo(x + tailLen, waveY);
+    ctx5.lineTo(x, waveY);
+    ctx5.stroke();
+  });
+
+  // ── 표면 반짝임 (낮) ──
+  if(!isNightRiver && !isRainy){
+    for(let i=0; i<14; i++){
+      const rx = W * (((i/14) + animT5*0.05 + i*0.07) % 1);
+      const ry = topY + rH * (0.2 + (i*0.13)%0.6);
+      const glint = 0.4 + 0.6*Math.sin(animT5*3 + i*1.2);
+      ctx5.fillStyle = `rgba(255,255,255,${glint*0.5})`;
+      ctx5.beginPath(); ctx5.ellipse(rx, ry, 7+i%3*2, 2, 0, 0, Math.PI*2); ctx5.fill();
+    }
+  }
+
+  // ── 파문 ──
+  RIVER_RIPPLES.forEach(rp => {
+    const rx = W * ((rp.t + animT5*rp.speed*0.4) % 1);
+    const ry = topY + rH * (0.15 + rp.lane*0.7);
+    const life = (rp.life + animT5*0.06) % 1;
+    const r = rp.r * life;
+    ctx5.strokeStyle = `rgba(255,255,255,${(1-life)*0.3})`;
+    ctx5.lineWidth = 0.8;
+    ctx5.beginPath(); ctx5.ellipse(rx, ry, r, r*0.35, 0, 0, Math.PI*2); ctx5.stroke();
+  });
+
+  // ── 빗물 파문 ──
+  if(isRainy){
+    for(let i=0; i<10; i++){
+      const rx = W * (((i*0.13 + animT5*0.09) % 1));
+      const ry = topY + rH*(0.1 + ((i*0.17+animT5*0.05)%0.8));
+      const life = ((animT5*0.7 + i*0.31) % 1);
+      const r = 4 + life*20;
+      ctx5.strokeStyle = `rgba(180,220,255,${(1-life)*0.45})`;
+      ctx5.lineWidth = 0.9;
+      ctx5.beginPath(); ctx5.ellipse(rx, ry, r, r*0.32, 0, 0, Math.PI*2); ctx5.stroke();
+    }
+  }
+
+  ctx5.restore();
+
+  // ── 강가 거품 (상단·하단 경계) ──
+  ctx5.save();
+  [topY + rH*0.04, botY - rH*0.04].forEach(ey => {
+    for(let i=0; i<10; i++){
+      const ex = W * ((i/10 + animT5*0.025 + i*0.07) % 1);
+      const foam = 0.3 + 0.4*Math.sin(animT5*2.2 + i*0.9);
+      ctx5.fillStyle = `rgba(255,255,255,${foam*0.55})`;
+      ctx5.beginPath(); ctx5.arc(ex, ey, 2.5+i%3, 0, Math.PI*2); ctx5.fill();
+    }
+  });
+  ctx5.restore();
+}
+
+function drawBridge5(W, H){
+  const topY  = H * GROUND5_Y;
+  const botY  = H * RIVER5_BOT;
+  const bx    = W * BRIDGE5_X;         // 다리 중심 x
+  const bw    = W * BRIDGE5_W * 0.5;   // 다리 반폭
+  const left  = bx - bw;
+  const right = bx + bw;
+  const slabT = 9;    // 다리 판 두께
+  const pillarW = 8;  // 기둥 너비
+  const railH   = 16; // 난간 높이
+
+  // ── 기둥 (강 속으로 내려감) ──
+  [[left+bw*0.25],[right-bw*0.25]].forEach(([px]) => {
+    const pilG = ctx5.createLinearGradient(px-pillarW/2, topY, px+pillarW/2, botY);
+    pilG.addColorStop(0, '#7a5a30');
+    pilG.addColorStop(1, '#4a3018');
+    ctx5.fillStyle = pilG;
+    ctx5.fillRect(px - pillarW/2, topY + slabT, pillarW, botY - topY - slabT);
+  });
+
+  // ── 다리 판 (지면과 같은 높이 → topY) ──
+  const slabG = ctx5.createLinearGradient(left, topY - slabT, right, topY);
+  slabG.addColorStop(0,   '#c49050');
+  slabG.addColorStop(0.4, '#d8aa6a');
+  slabG.addColorStop(0.7, '#c49050');
+  slabG.addColorStop(1,   '#a87038');
+  ctx5.fillStyle = slabG;
+  ctx5.fillRect(left, topY - slabT, right - left, slabT + 2);
+
+  // 판자 무늬
+  ctx5.strokeStyle = 'rgba(0,0,0,0.15)'; ctx5.lineWidth = 1;
+  const planks = 7;
+  for(let i=1; i<planks; i++){
+    const px = left + (right-left)*i/planks;
+    ctx5.beginPath(); ctx5.moveTo(px, topY-slabT); ctx5.lineTo(px, topY+2); ctx5.stroke();
+  }
+
+  // ── 난간 기둥들 ──
+  const posts = [left, left+(right-left)*0.33, left+(right-left)*0.67, right];
+  posts.forEach(px => {
+    ctx5.fillStyle = '#8b5a1a';
+    ctx5.fillRect(px - 3, topY - slabT - railH, 6, railH + slabT);
+  });
+
+  // ── 난간 가로 막대 ──
+  ctx5.strokeStyle = '#a06830'; ctx5.lineWidth = 3.5; ctx5.lineCap = 'round';
+  ctx5.beginPath();
+  ctx5.moveTo(left, topY - slabT - railH);
+  ctx5.lineTo(right, topY - slabT - railH);
+  ctx5.stroke();
+
+  // ── 다리 측면 그림자 ──
+  ctx5.fillStyle = 'rgba(50,25,5,0.45)';
+  ctx5.fillRect(left, topY + 2, right-left, 5);
+
+  // ── 다리 이모지 ──
+  ctx5.save();
+  ctx5.font = `${W*0.05}px serif`;
+  ctx5.textAlign = 'center';
+  ctx5.globalAlpha = 0.7 + 0.3*Math.sin(animT5*1.2);
+  ctx5.fillText('🌉', bx, topY - slabT - railH - 6);
+  ctx5.restore();
+
+  // ── 레버 힌트: 주인공이 다리 위에 있을 때 표시 ──
+  if(pet5State.floor === 'top' && isNearBridge5(pet5State.x) && !pet5State.onBridge){
+    const pulse = 0.5 + 0.5*Math.sin(animT5*3);
+    // 레버 모양 (다리 중앙 위)
+    const lx = bx, ly = topY - slabT - railH - 28;
+    ctx5.save();
+    ctx5.globalAlpha = 0.55 + 0.45*pulse;
+    // 레버 기둥
+    ctx5.fillStyle = '#c0392b';
+    ctx5.fillRect(lx - 2, ly, 4, 16);
+    // 레버 손잡이
+    ctx5.beginPath();
+    ctx5.arc(lx, ly, 5, 0, Math.PI*2);
+    ctx5.fillStyle = '#e74c3c';
+    ctx5.fill();
+    ctx5.strokeStyle = '#7f1010';
+    ctx5.lineWidth = 1.5;
+    ctx5.stroke();
+    // 아래 화살표
+    ctx5.fillStyle = `rgba(255,255,80,${0.7+0.3*pulse})`;
+    ctx5.font = `bold ${W*0.045}px serif`;
+    ctx5.textAlign = 'center';
+    ctx5.shadowColor = 'rgba(255,200,0,0.9)';
+    ctx5.shadowBlur = 8;
+    ctx5.fillText('⬇️', lx, ly + 34);
+    ctx5.restore();
+
+    // 안내 텍스트
+    ctx5.save();
+    ctx5.font = `bold ${W*0.032}px 'Jua', sans-serif`;
+    ctx5.textAlign = 'center';
+    ctx5.fillStyle = `rgba(255,255,150,${0.8+0.2*pulse})`;
+    ctx5.shadowColor = 'rgba(0,0,0,0.7)';
+    ctx5.shadowBlur = 4;
+    ctx5.fillText('레버↓ 내려가기', bx, topY - slabT - railH - 44);
+    ctx5.restore();
+  }
+
+  // ── 다리 하강 중: 주인공이 기둥 사이를 내려가는 효과 ──
+  if(pet5State.onBridge){
+    const progress = pet5State.bridgeProgress;
+    const py = topY + (botY - topY) * progress;
+    // 기둥 하이라이트
+    [[left+bw*0.25],[right-bw*0.25]].forEach(([px])=>{
+      const g = ctx5.createLinearGradient(px-pillarW/2, topY, px+pillarW/2, py);
+      g.addColorStop(0, 'rgba(255,200,80,0.0)');
+      g.addColorStop(1, 'rgba(255,200,80,0.4)');
+      ctx5.fillStyle = g;
+      ctx5.fillRect(px - pillarW/2, topY, pillarW, py - topY);
+    });
+  }
+}
+
+// ── 물고기 시스템 ──
+// f.y: 0=수면(강 상단), 양수=강물 속(아래), 음수=수면 위(공중)
+// 물고기는 강물 속에서 위로 솟구쳐 수면 위로 점프
+
+// [A] 풀밭 위로 뛰는 물고기 - 2마리, 출현 30% 수준
+const FISH5 = [
+  { x: 0.28, state: 'idle', idleTimer: 10 + Math.random()*12, y: 20, vy: 0, phase: Math.random()*Math.PI*2, splashT: 0 },
+  { x: 0.68, state: 'idle', idleTimer: 18 + Math.random()*14, y: 20, vy: 0, phase: Math.random()*Math.PI*2, splashT: 0 },
+];
+let fish5LastUpdate = 0;
+
+// [B] 강물 위(수면에서 반만 보이는) 물고기 - 2마리, 출현 30% 수준
+const RIVER_FISH5 = [
+  { x: 0.30, state: 'idle', idleTimer: 8 + Math.random()*12, py: 30, vy: 0, splashT: 0, peekTimer: 0, color: '#ff9933' },
+  { x: 0.65, state: 'idle', idleTimer: 15 + Math.random()*12, py: 30, vy: 0, splashT: 0, peekTimer: 0, color: '#44bbff' },
+];
+
+function updateFish5(){
+  const elapsed = 1/60; // 프레임당 약 1/60초
+
+  // [A] 풀밭 위 물고기 업데이트
+  FISH5.forEach(f => {
+    if(f.state === 'idle'){
+      f.idleTimer -= elapsed;
+      if(f.idleTimer <= 0){
+        f.state = 'rising';
+        f.y = 18;       // 강물 속 시작 위치 (수면에서 18px 아래)
+        f.vy = -3.2;    // 위로 솟구치는 속도
+      }
+    } else if(f.state === 'rising'){
+      f.y += f.vy;
+      f.vy += 0.12;     // 중력
+      // 수면 위로 충분히 올라왔으면 jump 상태
+      if(f.y <= -20){
+        f.state = 'jump';
+      }
+      // 못 올라오고 다시 내려가면 그냥 잠수
+      if(f.y >= 18 && f.vy > 0){
+        f.state = 'splash';
+        f.splashT = 0;
+        f.y = 0;
+      }
+    } else if(f.state === 'jump'){
+      f.y += f.vy;
+      f.vy += 0.14;
+      // 수면 통과 → splash 후 잠수
+      if(f.y >= 0){
+        f.y = 0;
+        f.state = 'splash';
+        f.splashT = 0;
+      }
+    } else if(f.state === 'splash'){
+      f.splashT += elapsed;
+      if(f.splashT >= 0.55){
+        f.state = 'idle';
+        f.y = 20;
+        f.vy = 0;
+        // 다음 등장까지 10~30초 대기
+        f.idleTimer = 10 + Math.random() * 20;
+        // 위치 살짝 이동 (다리 기둥 x는 피함)
+        let nx;
+        do { nx = 0.15 + Math.random() * 0.70; }
+        while(Math.abs(nx - BRIDGE5_X) < 0.10);
+        f.x = nx;
+      }
+    }
+  });
+
+  // [B] 강물 위 물고기 업데이트
+  // rf.py: 강 수면(surfaceY)으로부터의 픽셀 오프셋 (픽셀 단위, 양수=강 아래, 음수=수면 위)
+  // 강물 중간 특정 깊이(jumpDepth)에서 위로 솟아올라 수면에서 반만 보이고 다시 잠김
+  // → 수면 위로는 fishH(물고기 키)의 절반만 노출됨
+  const FISH_H_R = 8; // 강물 위 물고기 반높이(px)
+  const JUMP_DEPTH = 30; // 강물 속 대기 깊이(px) - 수면보다 30px 아래
+  const PEEK_TOP = 0; // 물고기 중심을 수면선(py=0)에 고정 → 윗절반만 수면 위로 보임
+
+  RIVER_FISH5.forEach(rf => {
+    if(rf.state === 'idle'){
+      rf.idleTimer -= elapsed;
+      if(rf.idleTimer <= 0){
+        rf.state = 'rising';
+        rf.py = JUMP_DEPTH;  // 강물 속 30px 아래에서 시작
+        rf.vy = -3.5;        // 위로 솟구치는 속도 (px/frame)
+      }
+    } else if(rf.state === 'rising'){
+      rf.py += rf.vy;
+      rf.vy += 0.18;   // 중력
+      // 수면 위로 반(fishH)만큼 올라오면 peek 상태 (위 절반만 보임)
+      if(rf.py <= PEEK_TOP){
+        rf.py = PEEK_TOP;
+        rf.vy = 0;
+        rf.state = 'peek';
+        rf.peekTimer = 0.35 + Math.random() * 0.25; // 잠깐 보임 0.35~0.6초
+      }
+      // 못 올라오고 다시 내려가면 잠수
+      if(rf.py >= JUMP_DEPTH && rf.vy > 0){
+        rf.state = 'splash';
+        rf.splashT = 0;
+        rf.py = 0;
+      }
+    } else if(rf.state === 'peek'){
+      // 수면에서 반만 보인 채로 잠깐 머뭄
+      rf.py = PEEK_TOP;
+      rf.peekTimer -= elapsed;
+      if(rf.peekTimer <= 0){
+        rf.state = 'sinking';
+        rf.vy = 2.5; // 다시 잠수
+      }
+    } else if(rf.state === 'sinking'){
+      rf.py += rf.vy;
+      rf.vy += 0.12;
+      if(rf.py >= 0){
+        rf.py = 0;
+        rf.state = 'splash';
+        rf.splashT = 0;
+      }
+    } else if(rf.state === 'splash'){
+      rf.splashT += elapsed;
+      if(rf.splashT >= 0.4){
+        rf.state = 'idle';
+        rf.py = JUMP_DEPTH;
+        rf.vy = 0;
+        // 8~18초 대기
+        rf.idleTimer = 8 + Math.random() * 10;
+        // 위치 이동 (다리 기둥 피함)
+        let nx;
+        do { nx = 0.12 + Math.random() * 0.76; }
+        while(Math.abs(nx - BRIDGE5_X) < 0.08);
+        rf.x = nx;
+      }
+    }
+  });
+}
+
+function drawFish5(W, H){
+  if(!canvas5||!ctx5) return;
+  const surfaceY = H * GROUND5_Y;   // 수면 y (강 상단 경계)
+  const botY     = H * RIVER5_BOT;  // 강 하단 경계
+
+  updateFish5();
+
+  FISH5.forEach(f => {
+    if(f.state === 'idle') return;
+
+    const cx = W * f.x;
+    // fishCenterY: 수면 기준 f.y만큼 아래(양수=강속, 음수=공중)
+    const fishCenterY = surfaceY + f.y;
+
+    // ── 물고기 몸통 ──
+    // 수면 위로 나온 부분(f.y < 0)이 있을 때만 그림
+    // 강물 속 부분은 강물에 덮여 보이지 않으므로 수면 위 부분만 클립해서 표시
+    if(f.y < 8){ // 수면 근처이거나 위로 나왔을 때
+      ctx5.save();
+
+      // 클립: 수면(surfaceY) 위쪽만 보이게 → 물 밖으로 나온 몸통만 표시
+      ctx5.beginPath();
+      ctx5.rect(0, 0, W, surfaceY);
+      ctx5.clip();
+
+      const tilt = f.vy < 0 ? -0.45 : 0.45;
+      ctx5.translate(cx, fishCenterY);
+      ctx5.rotate(tilt);
+
+      const fishLen = 20, fishH = 10;
+
+      // 몸통
+      const bodyG = ctx5.createRadialGradient(-2, -2, 1, 0, 0, fishLen*0.7);
+      bodyG.addColorStop(0, 'rgba(100,200,255,1)');
+      bodyG.addColorStop(0.4, 'rgba(50,150,220,1)');
+      bodyG.addColorStop(1, 'rgba(20,90,160,0.9)');
+      ctx5.fillStyle = bodyG;
+      ctx5.beginPath();
+      ctx5.ellipse(0, 0, fishLen, fishH, 0, 0, Math.PI*2);
+      ctx5.fill();
+
+      // 배 부분 밝게
+      ctx5.fillStyle = 'rgba(180,230,255,0.55)';
+      ctx5.beginPath();
+      ctx5.ellipse(-2, 2, fishLen*0.55, fishH*0.45, 0, 0, Math.PI*2);
+      ctx5.fill();
+
+      // 비늘 줄무늬
+      ctx5.strokeStyle = 'rgba(20,80,160,0.3)';
+      ctx5.lineWidth = 0.8;
+      for(let s=-1; s<=2; s++){
+        ctx5.beginPath();
+        ctx5.ellipse(s*5, 0, 4, fishH*0.65, 0, 0, Math.PI*2);
+        ctx5.stroke();
+      }
+
+      // 꼬리
+      ctx5.beginPath();
+      ctx5.moveTo(fishLen - 1, 0);
+      ctx5.lineTo(fishLen + 9, -fishH + 1);
+      ctx5.lineTo(fishLen + 9,  fishH - 1);
+      ctx5.closePath();
+      ctx5.fillStyle = 'rgba(30,110,200,0.92)';
+      ctx5.fill();
+
+      // 등지느러미
+      ctx5.beginPath();
+      ctx5.moveTo(-2, -fishH + 1);
+      ctx5.lineTo(4, -fishH - 6);
+      ctx5.lineTo(10, -fishH + 1);
+      ctx5.closePath();
+      ctx5.fillStyle = 'rgba(30,100,190,0.7)';
+      ctx5.fill();
+
+      // 눈
+      ctx5.beginPath();
+      ctx5.arc(-fishLen*0.52, -2, 2.8, 0, Math.PI*2);
+      ctx5.fillStyle = '#0a0a1a';
+      ctx5.fill();
+      ctx5.beginPath();
+      ctx5.arc(-fishLen*0.52 - 0.8, -2.8, 1.0, 0, Math.PI*2);
+      ctx5.fillStyle = 'rgba(255,255,255,0.75)';
+      ctx5.fill();
+
+      ctx5.restore();
+    }
+
+    // ── 수면 파문 (수면 근처일 때) ──
+    if(f.y > -8 && f.y < 10){
+      const rippleAlpha = 1 - Math.abs(f.y) / 10;
+      ctx5.save();
+      ctx5.strokeStyle = `rgba(200,240,255,${rippleAlpha * 0.7})`;
+      ctx5.lineWidth = 1.2;
+      ctx5.beginPath();
+      ctx5.ellipse(cx, surfaceY, 10 + Math.abs(f.y)*0.5, 3, 0, 0, Math.PI*2);
+      ctx5.stroke();
+      ctx5.restore();
+    }
+
+    // ── 물보라 (splash) ──
+    if(f.state === 'splash'){
+      const t = Math.min(f.splashT / 0.55, 1);
+      ctx5.save();
+      // 물방울들 — 수면 위로만
+      for(let i=0; i<8; i++){
+        const angle = -Math.PI + (i/8)*Math.PI; // 위쪽 반원
+        const r = (10 + i*3.5) * t;
+        const sx = cx + Math.cos(angle) * r * 0.8;
+        const sy = surfaceY + Math.sin(angle) * r * 0.65;
+        if(sy >= surfaceY) continue; // 수면 아래는 스킵
+        ctx5.globalAlpha = (1 - t) * 0.85;
+        ctx5.beginPath();
+        ctx5.arc(sx, sy, 2.8*(1-t*0.6), 0, Math.PI*2);
+        ctx5.fillStyle = 'rgba(160,220,255,0.9)';
+        ctx5.fill();
+      }
+      // 수면 파문
+      ctx5.globalAlpha = (1 - t) * 0.65;
+      ctx5.strokeStyle = 'rgba(200,240,255,0.8)';
+      ctx5.lineWidth = 1.4;
+      const rr = 14 + 22*t;
+      ctx5.beginPath();
+      ctx5.ellipse(cx, surfaceY, rr, rr*0.28, 0, 0, Math.PI*2);
+      ctx5.stroke();
+      // 안쪽 파문
+      if(t < 0.6){
+        ctx5.globalAlpha = (1 - t/0.6) * 0.45;
+        ctx5.beginPath();
+        ctx5.ellipse(cx, surfaceY, rr*0.45, rr*0.12, 0, 0, Math.PI*2);
+        ctx5.stroke();
+      }
+      ctx5.restore();
+    }
+  });
+
+  // ── [B] 강물 위 물고기 그리기 ──
+  // rf.py: 강 수면(surfaceY)으로부터의 픽셀 오프셋 (양수=강 아래, 음수=수면 위)
+  // peek 상태: 물고기 중심이 수면에서 fishH_R만큼 위 → 윗절반만 수면 위로 노출
+  RIVER_FISH5.forEach(rf => {
+    if(rf.state === 'idle') return;
+
+    const cx = W * rf.x;
+    // 물고기 중심 Y = 수면Y + rf.py
+    // (peek 상태: rf.py = -FISH_H_R → 물고기 중심이 수면 위 fishH_R px, 아래 절반은 물속)
+    const fishCenterY = surfaceY + rf.py;
+
+    const fishLen = 18, fishH = 8;
+    const [r1,g1,b1] = rf.color === '#ff9933' ? [255,153,51] : rf.color === '#ff6644' ? [255,102,68] : [68,187,255];
+
+    // 수면 근처(py < fishH)일 때만 그림
+    if(rf.py < fishH){
+      ctx5.save();
+
+      // ★ 클립 수정: 수면(surfaceY) 바로 위 fishH*2 범위만 허용
+      // → 물고기 윗절반(fishH px)만 수면 위로 보이고, 아랫절반은 강물에 잠김
+      // → surfaceY 아래는 강물이 덮어서 안 보이고, surfaceY 위 fishH*2 이상은 차단
+      ctx5.beginPath();
+      ctx5.rect(0, surfaceY - fishH * 2, W, fishH * 2); // 수면 위 fishH*2(=16px)만 허용
+      ctx5.clip();
+
+      ctx5.translate(cx, fishCenterY);
+      // 올라올 때 앞으로 기울고, 내려갈 때 뒤로 기움
+      const tilt = rf.vy < 0 ? -0.3 : (rf.vy > 0 ? 0.3 : 0);
+      ctx5.rotate(tilt);
+
+      // 몸통
+      const bodyG = ctx5.createRadialGradient(-2,-2,1,0,0,fishLen*0.7);
+      bodyG.addColorStop(0, `rgba(${Math.min(r1+60,255)},${Math.min(g1+60,255)},${Math.min(b1+60,255)},1)`);
+      bodyG.addColorStop(0.5, `rgba(${r1},${g1},${b1},1)`);
+      bodyG.addColorStop(1, `rgba(${Math.max(r1-60,0)},${Math.max(g1-60,0)},${Math.max(b1-60,0)},0.9)`);
+      ctx5.fillStyle = bodyG;
+      ctx5.beginPath();
+      ctx5.ellipse(0, 0, fishLen, fishH, 0, 0, Math.PI*2);
+      ctx5.fill();
+
+      // 배 밝게
+      ctx5.fillStyle = 'rgba(255,240,200,0.45)';
+      ctx5.beginPath();
+      ctx5.ellipse(-2, 2, fishLen*0.5, fishH*0.4, 0, 0, Math.PI*2);
+      ctx5.fill();
+
+      // 등지느러미 (위쪽이므로 잘 보임)
+      ctx5.beginPath();
+      ctx5.moveTo(-2, -fishH + 1);
+      ctx5.lineTo(4, -fishH - 6);
+      ctx5.lineTo(10, -fishH + 1);
+      ctx5.closePath();
+      ctx5.fillStyle = `rgba(${Math.max(r1-30,0)},${Math.max(g1-30,0)},${Math.max(b1-30,0)},0.85)`;
+      ctx5.fill();
+
+      // 꼬리 (물고기 오른쪽 끝)
+      ctx5.beginPath();
+      ctx5.moveTo(fishLen - 1, 0);
+      ctx5.lineTo(fishLen + 8, -fishH + 1);
+      ctx5.lineTo(fishLen + 8,  fishH - 1);
+      ctx5.closePath();
+      ctx5.fillStyle = `rgba(${Math.max(r1-40,0)},${Math.max(g1-40,0)},${Math.max(b1-40,0)},0.92)`;
+      ctx5.fill();
+
+      // 눈
+      ctx5.beginPath();
+      ctx5.arc(-fishLen*0.52, -2, 2.5, 0, Math.PI*2);
+      ctx5.fillStyle = '#0a0a1a';
+      ctx5.fill();
+      ctx5.beginPath();
+      ctx5.arc(-fishLen*0.52 - 0.7, -2.7, 0.9, 0, Math.PI*2);
+      ctx5.fillStyle = 'rgba(255,255,255,0.75)';
+      ctx5.fill();
+
+      ctx5.restore();
+    }
+
+    // ── 수면 파문 ──
+    // 물고기가 수면을 통과할 때(py가 0 근처)
+    if(rf.py > -fishH && rf.py < fishH){
+      const rippleProgress = 1 - Math.abs(rf.py) / fishH;
+      ctx5.save();
+      ctx5.strokeStyle = `rgba(180,230,255,${rippleProgress * 0.7})`;
+      ctx5.lineWidth = 1.3;
+      ctx5.beginPath();
+      ctx5.ellipse(cx, surfaceY, 12 + rippleProgress * 6, 3, 0, 0, Math.PI*2);
+      ctx5.stroke();
+      ctx5.restore();
+    }
+
+    // ── 물보라 (splash) ──
+    if(rf.state === 'splash'){
+      const t = Math.min(rf.splashT / 0.4, 1);
+      ctx5.save();
+      for(let i = 0; i < 7; i++){
+        const angle = -Math.PI + (i / 7) * Math.PI;
+        const r = (8 + i * 2.8) * t;
+        const sx2 = cx + Math.cos(angle) * r * 0.8;
+        const sy2 = surfaceY + Math.sin(angle) * r * 0.55;
+        if(sy2 >= surfaceY) continue;
+        ctx5.globalAlpha = (1 - t) * 0.85;
+        ctx5.beginPath();
+        ctx5.arc(sx2, sy2, 2.5 * (1 - t * 0.6), 0, Math.PI * 2);
+        ctx5.fillStyle = `rgba(${r1+30},${g1+30},${b1+30},0.9)`;
+        ctx5.fill();
+      }
+      ctx5.globalAlpha = (1 - t) * 0.65;
+      ctx5.strokeStyle = `rgba(${r1+40},${g1+40},${b1+40},0.8)`;
+      ctx5.lineWidth = 1.3;
+      const rr2 = 12 + 18 * t;
+      ctx5.beginPath();
+      ctx5.ellipse(cx, surfaceY, rr2, rr2 * 0.27, 0, 0, Math.PI * 2);
+      ctx5.stroke();
+      ctx5.restore();
+    }
+  });
+}
+
+let star5ToastShown = false; // 토스트 한 번만 표시
+
+// ── 풍뎅이 상태 ──
+const beetle5 = {
+  visible: false,       // 등장 여부
+  x: 0.82,             // 화면 오른쪽
+  met: false,          // 주인공과 만났는지
+};
+let beetle5FadeIn = 0; // 0→1 페이드인
+
+function drawStar5(W, H){
+  if(!canvas5||!ctx5) return;
+  const elapsed = animT5 - page5EnterTime;
+  if(elapsed < 10) return; // 10초 이전엔 표시 안 함
+
+  // 딱 한 번만 토스트 메시지 표시
+  if(!star5ToastShown){
+    star5ToastShown = true;
+    showToast5('⭐ 별이 생겼네요~');
+    // 첫 메시지 사라진 후(2.5초) + 3초 = 5.5초 후 두 번째 메시지
+    setTimeout(()=>showToast5('✨ 저 별을 갖고 싶은데 어떻게 하죠?'), 5500);
+    // 두 번째 메시지 사라진 후(2.5초) + 3초 = 5.5+2.5+3 = 11초 후 풍뎅이 등장
+    setTimeout(()=>{
+      beetle5.visible = true;
+      beetle5FadeIn = 0;
+      // 주인공 말풍선: 풍뎅이에게 부탁해볼까?
+      const bubble = document.getElementById('bubble-text5');
+      if(bubble) bubble.textContent = '저 풍뎅이 님에게 부탁해볼까? 🪲';
+    }, 11000);
+  }
+
+  // 페이드인: 10~12초 구간에서 서서히 등장
+  const fadeIn = Math.min((elapsed - 10) / 2, 1);
+
+  // 위치: floor-badge5("🌊 강가") 바로 아래
+  // badge는 top:8px, 높이 약 28px → 하단 약 36px, 별 반지름만큼 내려옴
+  const outerR = W * 0.055;
+  const innerR = outerR * 0.42;
+  const points = 5;
+  const cx = W * 0.50;
+  const cy = outerR + 36;
+
+  // 반짝임: 빠르게 밝기 변화
+  const twinkle = 0.55 + 0.45 * Math.sin(animT5 * 4.5);
+  const alpha = fadeIn * twinkle;
+
+  ctx5.save();
+  ctx5.globalAlpha = alpha;
+
+  // 외곽 글로우
+  const glow = ctx5.createRadialGradient(cx, cy, 0, cx, cy, outerR * 1.8);
+  glow.addColorStop(0, 'rgba(255,240,80,0.35)');
+  glow.addColorStop(0.5, 'rgba(255,220,50,0.12)');
+  glow.addColorStop(1, 'transparent');
+  ctx5.fillStyle = glow;
+  ctx5.beginPath();
+  ctx5.arc(cx, cy, outerR * 1.8, 0, Math.PI * 2);
+  ctx5.fill();
+
+  // 별 모양 (5각별)
+  ctx5.beginPath();
+  for(let i = 0; i < points * 2; i++){
+    const angle = (i * Math.PI / points) - Math.PI / 2;
+    const r = i % 2 === 0 ? outerR : innerR;
+    const x = cx + Math.cos(angle) * r;
+    const y = cy + Math.sin(angle) * r;
+    i === 0 ? ctx5.moveTo(x, y) : ctx5.lineTo(x, y);
+  }
+  ctx5.closePath();
+
+  // 별 그라디언트 (노란 → 흰 중심)
+  const starG = ctx5.createRadialGradient(cx, cy - outerR * 0.2, 0, cx, cy, outerR);
+  starG.addColorStop(0, 'rgba(255,255,200,1)');
+  starG.addColorStop(0.4, 'rgba(255,230,60,1)');
+  starG.addColorStop(1, 'rgba(255,180,20,0.85)');
+  ctx5.fillStyle = starG;
+  ctx5.fill();
+
+  // 별 외곽선 (살짝 밝게)
+  ctx5.strokeStyle = 'rgba(255,255,180,0.6)';
+  ctx5.lineWidth = 1.2;
+  ctx5.stroke();
+
+  // 중심 빛점
+  const centerGlow = ctx5.createRadialGradient(cx, cy, 0, cx, cy, outerR * 0.35);
+  centerGlow.addColorStop(0, 'rgba(255,255,255,0.9)');
+  centerGlow.addColorStop(1, 'transparent');
+  ctx5.fillStyle = centerGlow;
+  ctx5.beginPath();
+  ctx5.arc(cx, cy, outerR * 0.35, 0, Math.PI * 2);
+  ctx5.fill();
+
+  // 십자 빛줄기
+  ctx5.strokeStyle = `rgba(255,255,200,${0.5 * twinkle})`;
+  ctx5.lineWidth = 1.0;
+  const rayLen = outerR * 1.3;
+  [[0,1],[1,0],[0.7,0.7],[-0.7,0.7]].forEach(([dx,dy])=>{
+    ctx5.beginPath();
+    ctx5.moveTo(cx - dx * rayLen, cy - dy * rayLen);
+    ctx5.lineTo(cx + dx * rayLen, cy + dy * rayLen);
+    ctx5.stroke();
+  });
+
+  ctx5.restore();
+}
+
+function drawBeetle5(W, H){
+  if(!canvas5||!ctx5||!beetle5.visible) return;
+
+  // 페이드인
+  beetle5FadeIn = Math.min(beetle5FadeIn + 0.02, 1);
+
+  const grY = H * GROUND5_Y; // 풀밭 지면 Y
+  const cx = W * beetle5.x;
+  const cy = grY - 14; // 지면 위에 올려놓기
+
+  ctx5.save();
+  ctx5.globalAlpha = beetle5FadeIn;
+
+  // ── 몸통 (타원, 고동색) ──
+  const bw = 18, bh = 12;
+  const bodyG = ctx5.createRadialGradient(cx-3, cy-3, 1, cx, cy, bw);
+  bodyG.addColorStop(0, '#c07040');
+  bodyG.addColorStop(0.4, '#7a3a10');
+  bodyG.addColorStop(1, '#3a1500');
+  ctx5.fillStyle = bodyG;
+  ctx5.beginPath();
+  ctx5.ellipse(cx, cy, bw, bh, 0, 0, Math.PI*2);
+  ctx5.fill();
+
+  // 등 무늬 (중앙선)
+  ctx5.strokeStyle = 'rgba(0,0,0,0.35)';
+  ctx5.lineWidth = 1.2;
+  ctx5.beginPath();
+  ctx5.moveTo(cx, cy - bh + 2);
+  ctx5.lineTo(cx, cy + bh - 2);
+  ctx5.stroke();
+
+  // 등 무늬 (가로선 2개)
+  [-3, 3].forEach(dy=>{
+    ctx5.beginPath();
+    ctx5.ellipse(cx, cy+dy, bw*0.75, bh*0.28, 0, 0, Math.PI*2);
+    ctx5.stroke();
+  });
+
+  // ── 머리 (작은 원) ──
+  ctx5.fillStyle = '#2a0e00';
+  ctx5.beginPath();
+  ctx5.ellipse(cx - bw + 4, cy, 6, 5, -0.2, 0, Math.PI*2);
+  ctx5.fill();
+
+  // 눈
+  ctx5.fillStyle = '#ffcc00';
+  ctx5.beginPath();
+  ctx5.arc(cx - bw + 2, cy - 2, 1.5, 0, Math.PI*2);
+  ctx5.fill();
+
+  // ── 더듬이 ──
+  ctx5.strokeStyle = '#2a0e00';
+  ctx5.lineWidth = 1;
+  [[-2, -1],[-4, -1]].forEach(([ox,oy])=>{
+    ctx5.beginPath();
+    ctx5.moveTo(cx - bw + 4 + ox, cy - 5);
+    ctx5.quadraticCurveTo(cx - bw + ox*2, cy - 13, cx - bw + ox*2 - 2, cy - 16);
+    ctx5.stroke();
+    ctx5.beginPath();
+    ctx5.arc(cx - bw + ox*2 - 2, cy - 16, 1.5, 0, Math.PI*2);
+    ctx5.fillStyle = '#2a0e00';
+    ctx5.fill();
+  });
+
+  // ── 다리 (6개) ──
+  ctx5.strokeStyle = '#3a1500';
+  ctx5.lineWidth = 1.2;
+  [-6, 0, 6].forEach(dx=>{
+    // 왼쪽 다리
+    ctx5.beginPath();
+    ctx5.moveTo(cx+dx, cy+bh-2);
+    ctx5.lineTo(cx+dx-6, cy+bh+7);
+    ctx5.stroke();
+    // 오른쪽 다리
+    ctx5.beginPath();
+    ctx5.moveTo(cx+dx, cy-bh+2);
+    ctx5.lineTo(cx+dx-6, cy-bh-7);
+    ctx5.stroke();
+  });
+
+  // 광택
+  ctx5.fillStyle = 'rgba(255,180,100,0.22)';
+  ctx5.beginPath();
+  ctx5.ellipse(cx-4, cy-4, bw*0.45, bh*0.3, -0.4, 0, Math.PI*2);
+  ctx5.fill();
+
+  ctx5.restore();
+
+  // ── 말풍선 위치 업데이트 (DOM) ──
+  const bubbleEl = document.getElementById('beetle5-bubble');
+  if(bubbleEl && bubbleEl.style.display !== 'none'){
+    const top5El = document.getElementById('top5');
+    if(top5El){
+      const rect = top5El.getBoundingClientRect();
+      // 풍뎅이 위쪽에 말풍선 배치
+      const bubbleH = bubbleEl.offsetHeight || 50;
+      bubbleEl.style.left = Math.min(cx - 10, W - 180) + 'px';
+      bubbleEl.style.top  = (cy - bh - bubbleH - 8) + 'px';
+    }
+  }
+}
+
+function drawReturnDoor5(W, H){
+  const grY = H * GROUND5_Y;
+  const doorW = W * 0.10;
+  const doorH = doorW * 1.55;
+  const doorX = doorW * 0.10;
+  const doorY = grY - doorH;
+  const frameW = doorW * 0.13;
+  const depthX = doorW * 0.18;
+  const depthY = doorH * 0.07;
+
+  // 오른쪽 측면
+  ctx5.beginPath();
+  ctx5.moveTo(doorX+doorW, doorY);
+  ctx5.lineTo(doorX+doorW+depthX, doorY-depthY);
+  ctx5.lineTo(doorX+doorW+depthX, grY-depthY);
+  ctx5.lineTo(doorX+doorW, grY);
+  ctx5.closePath();
+  ctx5.fillStyle='#4a2a08'; ctx5.fill();
+
+  // 윗면
+  ctx5.beginPath();
+  ctx5.moveTo(doorX, doorY);
+  ctx5.lineTo(doorX+doorW, doorY);
+  ctx5.lineTo(doorX+doorW+depthX, doorY-depthY);
+  ctx5.lineTo(doorX+depthX, doorY-depthY);
+  ctx5.closePath();
+  ctx5.fillStyle='#7a4a18'; ctx5.fill();
+
+  // 내부 따뜻한 빛
+  const gx=doorX+frameW, gy=doorY+frameW, gw=doorW-frameW*2, gh=doorH-frameW;
+  const ig=ctx5.createLinearGradient(gx,gy,gx,gy+gh);
+  ig.addColorStop(0,'rgba(255,220,140,0.95)');
+  ig.addColorStop(0.5,'rgba(255,200,100,0.9)');
+  ig.addColorStop(1,'rgba(200,140,60,0.85)');
+  ctx5.fillStyle=ig; ctx5.fillRect(gx,gy,gw,gh);
+
+  const sh=0.15+0.06*Math.sin(animT5*1.8);
+  const lg2=ctx5.createRadialGradient(gx+gw*0.5,gy+gh*0.3,0,gx+gw*0.5,gy+gh*0.5,gw);
+  lg2.addColorStop(0,`rgba(255,255,200,${sh})`); lg2.addColorStop(1,'rgba(255,255,200,0)');
+  ctx5.fillStyle=lg2; ctx5.fillRect(gx,gy,gw,gh);
+
+  ctx5.fillStyle='#8b5a1a';
+  ctx5.fillRect(doorX,doorY,frameW,doorH);
+  ctx5.fillRect(doorX+doorW-frameW,doorY,frameW,doorH);
+  ctx5.fillRect(doorX,doorY,doorW,frameW);
+  ctx5.strokeStyle='#3d1f05'; ctx5.lineWidth=1.5;
+  ctx5.strokeRect(doorX,doorY,doorW,doorH);
+
+  ctx5.save();
+  ctx5.font=`bold ${doorW*0.22}px 'Jua', sans-serif`;
+  ctx5.textAlign='center';
+  ctx5.fillStyle=`rgba(255,220,80,${0.7+0.3*Math.sin(animT5*2)})`;
+  ctx5.shadowColor='rgba(255,180,0,0.8)'; ctx5.shadowBlur=6;
+  ctx5.fillText('PREV', doorX+doorW*0.5, doorY-doorW*0.15);
+  ctx5.restore();
+}
+
+// ── 다리 x 범위 판정 ──
+function isNearBridge5(x){
+  const left  = BRIDGE5_X - BRIDGE5_W * 0.5;
+  const right = BRIDGE5_X + BRIDGE5_W * 0.5;
+  return x >= left - 0.04 && x <= right + 0.04;
+}
+
+// ── 5페이지 물리 ──
+function physics5Step(){
+  if(!canvas5) return;
+  const W=canvas5.width, H=canvas5.height;
+  const topGroundY  = H * GROUND5_Y;          // 위쪽 풀밭 지면
+  const botGroundY  = H * BOTTOM5_Y_RATIO;     // 강 아래 풀밭 지면
+  const bridgeTopY  = H * GROUND5_Y;           // 다리 진입 위치 (지면과 동일)
+  const bridgeBotY  = H * RIVER5_BOT;          // 다리 내려온 위치 (강 하단)
+
+  // ── 다리 하강/상승 중 처리 ──
+  if(pet5State.onBridge){
+    pet5State.vx = 0;
+    const H=canvas5.height;
+    const bridgeTopY = H * GROUND5_Y;
+    const bridgeBotY = H * RIVER5_BOT;
+
+    if(pet5State._ascending){
+      // 올라가기
+      pet5State.bridgeProgress -= 0.018;
+      if(pet5State.bridgeProgress <= 0){
+        pet5State.onBridge = false;
+        pet5State._ascending = false;
+        pet5State.floor = 'top';
+        pet5State.bridgeProgress = 0;
+        pet5State.absY = bridgeTopY;
+        pet5State.wobbleV = 3;
+        showToast5('🌿 위쪽 풀밭으로 올라왔어요!');
+        document.getElementById('floor-badge5').textContent = '🌊 강가';
+      } else {
+        pet5State.absY = bridgeTopY + (bridgeBotY - bridgeTopY) * pet5State.bridgeProgress;
+        pet5State.x = BRIDGE5_X;
+      }
+    } else {
+      // 내려가기
+      pet5State.bridgeProgress += 0.018;
+      if(pet5State.bridgeProgress >= 1){
+        pet5State.onBridge = false;
+        pet5State.floor = 'bottom';
+        pet5State.bridgeProgress = 0;
+        pet5State.absY = H * BOTTOM5_Y_RATIO;
+        pet5State.wobbleV = 3;
+        showToast5('🌊 강 아래에 도착했어요! 좌우로 이동해보세요!');
+        document.getElementById('floor-badge5').textContent = '🌊 강 아래';
+      } else {
+        pet5State.absY = bridgeTopY + (bridgeBotY - bridgeTopY) * pet5State.bridgeProgress;
+        pet5State.x = BRIDGE5_X;
+      }
+    }
+    return;
+  }
+
+  // ── 수평 이동 ──
+  if(joy5Dx!==0){
+    pet5State.vx += joy5Dx * ACCEL5;
+    pet5State.vx = Math.max(-MAX_SPEED5, Math.min(MAX_SPEED5, pet5State.vx));
+  } else {
+    pet5State.vx *= FRICTION5;
+    if(Math.abs(pet5State.vx)<0.00005) pet5State.vx=0;
+  }
+  pet5State.x += pet5State.vx * 60;
+
+  // 층별 이동 범위 제한
+  if(pet5State.floor === 'top'){
+    pet5State.x = Math.max(0.02, Math.min(0.98, pet5State.x));
+  } else {
+    // 아래층: 왼쪽 0.04 ~ 오른쪽 0.96
+    pet5State.x = Math.max(0.04, Math.min(0.96, pet5State.x));
+  }
+
+  // ── 수직 처리 ──
+  const currentGroundY = pet5State.floor === 'top' ? topGroundY : botGroundY;
+
+  if(pet5State.isJumping){
+    pet5State.vy += GRAVITY5;
+    pet5State.absY += pet5State.vy;
+    if(pet5State.vy > 0 && pet5State.absY >= currentGroundY){
+      pet5State.absY = currentGroundY;
+      pet5State.vy = 0;
+      pet5State.isJumping = false;
+      pet5State.wobbleV += (Math.random()-0.5)*5;
+    }
+  } else {
+    pet5State.absY = currentGroundY;
+  }
+
+  // ── 흔들림 ──
+  const isMoving=Math.abs(pet5State.vx)>0.00003;
+  if(isMoving){
+    pet5State.walkPhase += 0.3;
+    pet5State.wobble = (pet5State.vx>0?6:-6)*0.5 + Math.sin(pet5State.walkPhase)*7*0.5;
+  } else {
+    pet5State.wobbleV += (-pet5State.wobble*0.15 - pet5State.wobbleV*0.28);
+    pet5State.wobble += pet5State.wobbleV;
+    pet5State.wobble = Math.max(-28,Math.min(28,pet5State.wobble));
+  }
+
+  // ── 다리 레버 감지 (위층에서만): 조이스틱 아래로 + 다리 위 위치 ──
+  if(pet5State.floor === 'top' && !pet5State.isJumping && joy5Dy > 0.55 && isNearBridge5(pet5State.x) && !window.bridge5Descending){
+    window.bridge5Descending = true;
+    pet5State.vx = 0;
+    showToast5('⬇️ 다리를 타고 내려가요!');
+    setTimeout(()=>{
+      pet5State.onBridge = true;
+      pet5State.bridgeProgress = 0;
+      pet5State.x = BRIDGE5_X;
+      window.bridge5Descending = false;
+    }, 300);
+  }
+
+  // ── 왼쪽 귀환문 감지 ──
+  if(pet5State.floor === 'top'){
+    const EXIT5_LEFT = 0.10;
+    if(pet5State.x < EXIT5_LEFT && !pet5State.isJumping && !window.exit5LeftShown){
+      window.exit5LeftShown = true;
+      pet5State.vx = 0;
+      setTimeout(()=>showPage5ReturnDialog(), 200);
+    }
+  }
+
+  // ── 아래층: 다리 근처에서 조이스틱 위로 → 다시 위층으로 올라가기 ──
+  if(pet5State.floor === 'bottom' && !pet5State.isJumping && joy5Dy < -0.55 && isNearBridge5(pet5State.x) && !window.bridge5Ascending){
+    window.bridge5Ascending = true;
+    pet5State.vx = 0;
+    showToast5('⬆️ 다리를 타고 올라가요!');
+    setTimeout(()=>{
+      // 올라가는 애니메이션 (하강의 역순)
+      pet5State.onBridge = true;
+      pet5State.bridgeProgress = 1; // 아래에서 위로
+      pet5State.x = BRIDGE5_X;
+      // 올라가는 방향으로 progress 감소
+      pet5State._ascending = true;
+      window.bridge5Ascending = false;
+    }, 300);
+  }
+
+  // ── 풍뎅이 만남 감지 ──
+  if(beetle5.visible && !beetle5.met && pet5State.floor === 'top' && !pet5State.isJumping){
+    const dist = Math.abs(pet5State.x - beetle5.x);
+    if(dist < 0.10){
+      beetle5.met = true;
+      // 주인공 말풍선
+      const bubble = document.getElementById('bubble-text5');
+      if(bubble) bubble.textContent = '저 별을 갖고 싶어요~ ⭐';
+      // 풍뎅이 말풍선 표시
+      const beetleBubble = document.getElementById('beetle5-bubble');
+      const beetleText   = document.getElementById('beetle5-bubble-text');
+      if(beetleBubble && beetleText){
+        beetleText.textContent = '그래? 잠시 있어봐~ 🪲';
+        beetleBubble.style.display = 'flex';
+        beetleBubble.style.flexDirection = 'column';
+      }
+    }
+  }
+}
+
+function applyPet5Transform(){
+  const pet=document.getElementById('pet-container5');
+  if(!pet||!canvas5) return;
+  const top5=document.getElementById('top5');
+  if(!top5) return;
+  const W=top5.clientWidth;
+  const petW=pet.offsetWidth||80, petH=pet.offsetHeight||90;
+  const left=W*pet5State.x - petW/2;
+  let topPx = pet5State.absY - petH;
+  pet.style.position='absolute';
+  pet.style.left=left+'px';
+  pet.style.top=topPx+'px';
+  pet.style.marginTop='0';
+  pet.style.transform='rotate('+pet5State.wobble+'deg)';
+  pet.style.transition='none';
+}
+
+function showPage5ReturnDialog(){
+  showGameModal(
+    '강가를 떠나 야외로 돌아갈까요? 🌿',
+    ()=>{
+      window.exit5LeftShown = false;
+      exitPage5();
+    },
+    ()=>{
+      pet5State.x = 0.10 + 0.12;
+      pet5State.vx = 0;
+      window.exit5LeftShown = false;
+    }
+  );
+}
+
+function exitPage5(){
+  window.loop5Running = false;
+  // 4페이지로 복귀
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page4').classList.add('active');
+  // 4페이지에서 오른쪽 출구문 바로 왼쪽에 등장
+  pet4State.x = 0.82;
+  pet4State.vx = 0; pet4State.vy = 0;
+  pet4State.isJumping = false;
+  window.exit5Shown = false;
+  showToast4('🌿 야외로 돌아왔어요!');
+}
+
+function loop5(ts){
+  if(!window.loop5Running) return;
+  animT5 = ts/1000;
+  if(page5EnterTime < 0) page5EnterTime = animT5; // 첫 프레임에 진입 시각 기록
+  drawScene5();
+  physics5Step();
+  applyPet5Transform();
+  requestAnimationFrame(loop5);
+}
+
+function init5Joystick(){
+  const joyLeft5=document.getElementById('joy-left5');
+  const knob5=document.getElementById('joy-knob5');
+  const jumpBtn5=document.getElementById('jump-btn5');
+  if(!joyLeft5||!knob5||!jumpBtn5) return;
+
+  function getJoy5Center(){ const r=joyLeft5.getBoundingClientRect(); return {cx:r.left+r.width/2, cy:r.top+r.height/2}; }
+  function updateKnob5(dx,dy){
+    const dist=Math.sqrt(dx*dx+dy*dy), maxD=32;
+    const clamped=Math.min(dist,maxD);
+    const nx=dx/Math.max(dist,1)*clamped, ny=dy/Math.max(dist,1)*clamped;
+    knob5.style.transform=`translate(calc(-50% + ${nx}px), calc(-50% + ${ny}px))`;
+    joy5Dx=nx/maxD;
+    joy5Dy=ny/maxD;
+  }
+  function resetKnob5(){ knob5.style.transform='translate(-50%,-50%)'; joy5Dx=0; joy5Dy=0; }
+
+  let touch5Id=null;
+  joyLeft5.addEventListener('touchstart',e=>{ e.preventDefault(); const t=e.touches[0]; touch5Id=t.identifier; const {cx,cy}=getJoy5Center(); updateKnob5(t.clientX-cx,t.clientY-cy); },{passive:false});
+  joyLeft5.addEventListener('touchmove',e=>{ e.preventDefault(); for(const t of e.touches){ if(t.identifier===touch5Id){ const {cx,cy}=getJoy5Center(); updateKnob5(t.clientX-cx,t.clientY-cy); } } },{passive:false});
+  joyLeft5.addEventListener('touchend',e=>{ for(const t of e.changedTouches){ if(t.identifier===touch5Id){ touch5Id=null; resetKnob5(); } } });
+
+  let md5=false;
+  joyLeft5.addEventListener('mousedown',e=>{ md5=true; const {cx,cy}=getJoy5Center(); updateKnob5(e.clientX-cx,e.clientY-cy); });
+  window.addEventListener('mousemove',e=>{ if(!md5)return; const {cx,cy}=getJoy5Center(); updateKnob5(e.clientX-cx,e.clientY-cy); });
+  window.addEventListener('mouseup',()=>{ if(md5){ md5=false; resetKnob5(); } });
+
+  jumpBtn5.addEventListener('touchstart',e=>{ e.preventDefault(); if(!pet5State.isJumping){ pet5State.vy=JUMP5_VY; pet5State.isJumping=true; } },{passive:false});
+  jumpBtn5.addEventListener('mousedown',()=>{ if(!pet5State.isJumping){ pet5State.vy=JUMP5_VY; pet5State.isJumping=true; } });
+}
+
+window.exit5LeftShown = false;
+window.loop5Running = false;
+window.bridge5Descending = false;
+window.bridge5Ascending = false;
+let page5EnterTime = 0; // 5페이지 진입 시각 (animT5 기준)
+
+function enterPage5(){
+  // 5페이지 초기화
+  pet5State.x = 0.14;
+  pet5State.vx = 0; pet5State.vy = 0;
+  pet5State.isJumping = false;
+  pet5State.wobble = 0; pet5State.wobbleV = 0;
+  pet5State.floor = 'top';
+  pet5State.onBridge = false;
+  pet5State.bridgeProgress = 0;
+  pet5State._ascending = false;
+  window.exit5LeftShown = false;
+  window.bridge5Descending = false;
+  window.bridge5Ascending = false;
+
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page5').classList.add('active');
+
+  // 캔버스 초기화
+  canvas5 = document.getElementById('scene-canvas5');
+  ctx5 = canvas5.getContext('2d');
+  resize5Canvas();
+  // 지면 높이 맞추기
+  pet5State.absY = canvas5.height * GROUND5_Y;
+
+  // 펫 이모지 동기화
+  document.getElementById('pet-emoji5').textContent = STAGES[S.stage].emoji;
+  document.getElementById('stage-badge5').textContent = STAGES[S.stage].emoji + ' ' + STAGES[S.stage].name;
+
+  // 인사 메시지
+  document.getElementById('bubble-text5').textContent = '강물 소리가 참 좋아요! 🌊';
+  document.getElementById('floor-badge5').textContent = '🌊 강가';
+
+  // 조이스틱
+  init5Joystick();
+
+  // 루프 시작
+  if(!window.loop5Running){
+    window.loop5Running = true;
+    page5EnterTime = -1; // loop5 첫 프레임에서 animT5로 초기화
+    requestAnimationFrame(loop5);
+  } else {
+    page5EnterTime = -1; // 재진입 시 리셋
+  }
+  star5ToastShown = false; // 재진입 시 토스트도 리셋
+  beetle5.visible = false; beetle5.met = false; beetle5FadeIn = 0;
+  const beetleBubble = document.getElementById('beetle5-bubble');
+  if(beetleBubble) beetleBubble.style.display = 'none';
+
+  setTimeout(()=>showToast5('👈 왼쪽 문으로 야외 복귀 | 🌉 다리 위에서 레버↓ 강 아래로!'), 1500);
+}
+
+window.addEventListener('resize',()=>{ resize4Canvas(); resize5Canvas(); });
 
 setInterval(saveState,5000);
 
@@ -2169,6 +3920,7 @@ function drawSky(){
   const bad=1-Math.min(health,clean)/100;
   const code=weatherScene.code;
   const wType=getWeatherType(code);
+  const isRainy = (wType==='rain'||wType==='thunder'||wType==='showers'||wType==='drizzle');
   const now=new Date();
   const hour=now.getHours();
   const isNight=(hour>=22||hour<5);
@@ -2307,7 +4059,6 @@ function drawSky(){
 
   // ⑤ 태양 (낮에 맑을 때) — 왼→오 (동→서) 이동
   const daytime = (!isNight&&!isDusk)?1:(isDusk&&hour>=5&&hour<8)?0.5:0;
-  const isRainy = (wType==='rain'||wType==='thunder'||wType==='showers'||wType==='drizzle');
   if(daytime>0.05&&(wType==='clear'||wType==='mostly_clear'||wType==='partly_cloudy')&&!isRainy){
     const sunAlpha=daytime*(wType==='clear'?0.9:wType==='mostly_clear'?0.7:0.45);
     const sunMin=now.getMinutes()/60;
